@@ -45,6 +45,7 @@ export default {
         gold: {
           DEFAULT: "hsl(var(--gold))",
           foreground: "hsl(var(--gold-foreground))",
+          muted: "hsl(var(--gold-muted))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -53,6 +54,13 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        surface: {
+          DEFAULT: "hsl(var(--surface))",
+          elevated: "hsl(var(--surface-elevated))",
+        },
+        crimson: {
+          muted: "hsl(var(--crimson-muted))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
