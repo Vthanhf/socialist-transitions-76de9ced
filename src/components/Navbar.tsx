@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const NAV_ITEMS = [
   { id: "hero", label: "Khảo sát", num: "01" },
@@ -108,6 +109,20 @@ export default function Navbar() {
                 </button>
               );
             })}
+            {/* Separator */}
+            <div className="w-px h-4 bg-border/30 mx-2" />
+            {/* External page link */}
+            <Link
+              to="/ethnic-distribution"
+              className="group relative px-2.5 py-1.5 text-[11px] font-medium tracking-wide transition-all duration-300 text-muted-foreground/60 hover:text-foreground/80"
+            >
+              <span className="relative z-10 flex items-center gap-1.5">
+                <span className="text-[9px] font-mono transition-colors duration-300 text-muted-foreground/30 group-hover:text-muted-foreground/50">
+                  06
+                </span>
+                Khám phá dân tộc
+              </span>
+            </Link>
           </div>
         </div>
       </motion.nav>

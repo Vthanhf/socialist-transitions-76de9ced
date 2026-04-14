@@ -1,0 +1,274 @@
+import React, { useState, useEffect, useRef } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  useMapEvents,
+} from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { ethnicGroupsData, provinceCoordinates } from "@/data/ethnicGroupsData";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
+import "./EthnicDistributionMap.css";
+
+interface SelectedEthnic {
+  id: string;
+  name: string;
+}
+
+// Component để capture map reference
+const MapCaptureComponent: React.FC<{
+  onMapReady: (map: L.Map) => void;
+}> = ({ onMapReady }) => {
+  const map = useMapEvents({
+    load: () => {
+      onMapReady(map);
+    },
+  });
+  return null;
+};
+
+// Component để quản lý circles layer bằng imperative API
+const CirclesLayerManager: React.FC<{
+  selectedEthnicGroups: SelectedEthnic[];
+  ethnicGroupsData: typeof ethnicGroupsData;
+  provinceCoordinates: Record<string, { lat: number; lng: number }>;
+  mapRef: React.MutableRefObject<L.Map | null>;
+}> = ({
+  selectedEthnicGroups,
+  ethnicGroupsData: data,
+  provinceCoordinates: coords,
+  mapRef,
+}) => {
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    // Clear all previous circle layers
+    map.eachLayer((layer) => {
+      if (layer instanceof L.CircleMarker) {
+        map.removeLayer(layer);
+      }
+    });
+
+    // Add new circles
+    selectedEthnicGroups.forEach((selectedEthnic) => {
+      const ethnic = data.find((e) => e.id === selectedEthnic.id);
+      if (!ethnic) return;
+
+      ethnic.regions.forEach((region: string) => {
+        const coord = coords[region];
+        if (!coord) return;
+
+        const baseRadius = 15;
+        const populationDensity = ethnic.population / (ethnic.regions.length * 1000000);
+        const radius = baseRadius + Math.min(populationDensity * 10, 15);
+
+        const popupContent = `
+          <div style="color: ${ethnic.color}; font-weight: 700; font-size: 15px; margin-bottom: 8px;">
+            ${ethnic.name}
+          </div>
+          <div style="border-top: 2px solid ${ethnic.color}; padding-top: 8px;">
+            <p style="margin: 6px 0;"><strong>Khu vực:</strong> ${region}</p>
+            <p style="margin: 6px 0;"><strong>Tổng dân số:</strong> ${(ethnic.population / 1000000).toFixed(1)} triệu</p>
+            <p style="margin: 6px 0;"><strong>Ngôn ngữ:</strong> ${ethnic.language}</p>
+            ${ethnic.clothing ? `<p style="margin: 6px 0;"><strong>Trang phục:</strong> ${ethnic.clothing}</p>` : ""}
+          </div>
+          <p style="margin: 8px 0 0 0; font-size: 12px; line-height: 1.5; color: #555;">
+            ${ethnic.description}
+          </p>
+        `;
+
+        const circle = L.circleMarker([coord.lat, coord.lng], {
+          radius,
+          fillColor: ethnic.color,
+          color: ethnic.color,
+          weight: 2,
+          opacity: 0.7,
+          fillOpacity: Math.min(populationDensity * 0.6, 0.6),
+        });
+
+        circle.bindPopup(popupContent);
+        circle.addTo(map);
+      });
+    });
+  }, [selectedEthnicGroups, data, coords, mapRef]);
+
+  return null;
+};
+
+const EthnicDistributionMap: React.FC = () => {
+  const [selectedEthnicGroups, setSelectedEthnicGroups] = useState<SelectedEthnic[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const mapRef = useRef<L.Map | null>(null);
+
+  const filteredEthnicGroups = ethnicGroupsData.filter(
+    (group) =>
+      group.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      group.enName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const toggleEthnicGroup = (id: string, name: string) => {
+    setSelectedEthnicGroups((prev) => {
+      const exists = prev.find((e) => e.id === id);
+      if (exists) {
+        return prev.filter((e) => e.id !== id);
+      } else {
+        return [...prev, { id, name }];
+      }
+    });
+  };
+
+  const clearSelection = () => {
+    setSelectedEthnicGroups([]);
+    setSearchQuery("");
+  };
+
+  const isSelected = (id: string) => selectedEthnicGroups.some((e) => e.id === id);
+
+  const getEthnicColor = (id: string) => {
+    return ethnicGroupsData.find((e) => e.id === id)?.color || "#999";
+  };
+
+  return (
+    <div className="ethnic-distribution-container">
+      <div className="ethnic-sidebar">
+        <div className="sidebar-header">
+          <h2>🗺️ Phân bố dân tộc Việt Nam</h2>
+          <p className="subtitle">Chọn dân tộc để xem phân bố trên bản đồ</p>
+        </div>
+
+        <div className="search-section">
+          <Input
+            placeholder="Tìm kiếm dân tộc..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
+        </div>
+
+        {selectedEthnicGroups.length > 0 && (
+          <div className="selected-section">
+            <div className="selected-header">
+              <span className="selected-count">
+                Đã chọn: {selectedEthnicGroups.length}/{ethnicGroupsData.length}
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={clearSelection}
+                className="clear-button"
+              >
+                Xóa tất cả
+              </Button>
+            </div>
+            <div className="selected-badges">
+              {selectedEthnicGroups.map((ethnic) => (
+                <Badge
+                  key={ethnic.id}
+                  className="selected-badge"
+                  style={{
+                    backgroundColor: getEthnicColor(ethnic.id),
+                    cursor: "pointer",
+                  }}
+                  onClick={() => toggleEthnicGroup(ethnic.id, ethnic.name)}
+                >
+                  {ethnic.name} ✕
+                </Badge>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <ScrollArea className="ethnic-list">
+          <div className="ethnic-grid">
+            {filteredEthnicGroups.length > 0 ? (
+              filteredEthnicGroups.map((group) => (
+                <div
+                  key={group.id}
+                  className={`ethnic-item ${isSelected(group.id) ? "selected" : ""}`}
+                  onClick={() => toggleEthnicGroup(group.id, group.name)}
+                  title={group.description}
+                >
+                  <div
+                    className="ethnic-color-indicator"
+                    style={{ backgroundColor: group.color }}
+                  />
+                  <div className="ethnic-info">
+                    <h4 className="ethnic-name">{group.name}</h4>
+                    <p className="ethnic-pop">
+                      {(group.population / 1000000).toFixed(1)}M
+                    </p>
+                  </div>
+                  {isSelected(group.id) && (
+                    <div className="checkmark">✓</div>
+                  )}
+                </div>
+              ))
+            ) : (
+              <div className="no-results">
+                Không tìm thấy dân tộc "{searchQuery}"
+              </div>
+            )}
+          </div>
+        </ScrollArea>
+      </div>
+
+      <div className="map-container">
+        <MapContainer
+          center={[16.5, 107]}
+          zoom={6}
+          style={{ height: "100%", width: "100%" }}
+          zoomControl={true}
+          ref={mapRef}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <CirclesLayerManager
+            selectedEthnicGroups={selectedEthnicGroups}
+            ethnicGroupsData={ethnicGroupsData}
+            provinceCoordinates={provinceCoordinates}
+            mapRef={mapRef}
+          />
+        </MapContainer>
+
+        {selectedEthnicGroups.length === 0 && (
+          <div className="map-overlay-message">
+            <div className="message-content">
+              <h3>🎯 Chọn một hoặc nhiều dân tộc từ danh sách bên trái</h3>
+              <p>Bản đồ sẽ hiển thị vùng phân bố của các dân tộc bạn chọn</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+    );
+};
+
+export default EthnicDistributionMap;
+          <div className="map-legend">
+            <div className="legend-title">Chú thích</div>
+            <div className="legend-item">
+              <div className="legend-dot large"></div>
+              <span>Mật độ dân cư cao</span>
+            </div>
+            <div className="legend-item">
+              <div className="legend-dot medium"></div>
+              <span>Mật độ dân cư trung bình</span>
+            </div>
+            <div className="legend-item">
+              <div className="legend-dot small"></div>
+              <span>Mật độ dân cư thấp</span>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default EthnicDistributionMap;
