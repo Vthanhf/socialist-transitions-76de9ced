@@ -166,7 +166,7 @@
 .map-container {
   flex: 1;
   position: relative;
-  background-color: #f0f0f0;
+  background: linear-gradient(135deg, #0099cc 0%, #00a8d8 50%, #0088bb 100%);
 }
 
 .map-container svg {
@@ -236,4 +236,48 @@
   margin: 0;
   font-size: 0.875rem;
   color: #64748b;
+}
+
+/* Sources footer */
+.sources-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0));
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.sources-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.sources-label {
+  font-weight: 600;
+  color: #475569;
+}
+
+.sources-link {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.sources-link:hover {
+  color: #1d4ed8;
+  border-bottom-color: #3b82f6;
+}
+
+.sources-separator {
+  color: #cbd5e1;
 }

@@ -321,6 +321,20 @@ const renderEthnicCircles = () => {
 
             {/* Ethnic group circles */}
             {renderEthnicCircles()}
+            <Marker coordinates={[112.0, 16.5]}>
+              <circle r={3} fill="#64748b" />
+              <text y={15} textAnchor="middle" fill="#475569" fontSize={12} fontWeight="bold" style={{ pointerEvents: "none" }}>
+                QĐ. Hoàng Sa
+              </text>
+            </Marker>
+
+            {/* Điểm Quần đảo Trường Sa */}
+            <Marker coordinates={[113.0, 9.0]}>
+              <circle r={3} fill="#64748b" />
+              <text y={15} textAnchor="middle" fill="#475569" fontSize={12} fontWeight="bold" style={{ pointerEvents: "none" }}>
+                QĐ. Trường Sa
+              </text>
+            </Marker>
           </ZoomableGroup>
         </ComposableMap>
 
@@ -354,6 +368,30 @@ const renderEthnicCircles = () => {
             </div>
           </div>
         )}
+
+        {/* Sources section */}
+        <div className="sources-footer">
+          <div className="sources-content">
+            <span className="sources-label">Nguồn:</span>
+            <a 
+              href="https://vi.wikipedia.org/wiki/Các_dân_tộc_tại_Việt_Nam" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="sources-link"
+            >
+              Wikipedia - Các dân tộc tại Việt Nam
+            </a>
+            <span className="sources-separator">•</span>
+            <a 
+              href="http://www.cema.gov.vn/gioi-thieu/cong-dong-54-dan-toc.htm" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="sources-link"
+            >
+              Cơm - Cộng đồng 54 dân tộc
+            </a>
+          </div>
+        </div>
       </div>
       </div>
     </>
