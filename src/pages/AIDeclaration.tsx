@@ -17,7 +17,7 @@ const AI_TOOLS = [
   },
   {
     name: "Lovable + Claude",
-    description: "Lập trình toàn bộ giao diện web dự án",
+    description: "Hỗ trợ lập trình giao diện web dự án",
     icon: Code,
     color: "from-purple-500 to-pink-600",
   },
