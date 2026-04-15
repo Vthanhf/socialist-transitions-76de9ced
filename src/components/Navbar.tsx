@@ -3,8 +3,8 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const NAV_ITEMS = [
-  { id: "hero", label: "Khảo sát", num: "01" },
-  { id: "balance", label: "Cán cân", num: "02" },
+  { id: "balance", label: "Cán cân", num: "01" },
+  { id: "hero", label: "Khảo sát", num: "02" },
   { id: "section1", label: "Dân tộc", num: "03" },
   { id: "section2", label: "Mác-Lênin", num: "04" },
   { id: "section3", label: "Việt Nam", num: "05" },
@@ -51,11 +51,10 @@ export default function Navbar() {
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-[2px] left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-background/80 backdrop-blur-xl border-b border-border/50"
-            : "bg-transparent"
-        }`}
+        className={`fixed top-[2px] left-0 right-0 z-50 transition-all duration-500 ${scrolled
+          ? "bg-background/80 backdrop-blur-xl border-b border-border/50"
+          : "bg-transparent"
+          }`}
       >
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-11">
           {/* Left: Title + active section indicator */}
@@ -83,11 +82,10 @@ export default function Navbar() {
                 <button
                   key={item.id}
                   onClick={() => scrollTo(item.id)}
-                  className={`group relative px-2.5 py-1.5 text-[11px] font-medium tracking-wide transition-all duration-300 ${
-                    isActive
-                      ? "text-foreground"
-                      : "text-muted-foreground/60 hover:text-foreground/80"
-                  }`}
+                  className={`group relative px-2.5 py-1.5 text-[11px] font-medium tracking-wide transition-all duration-300 ${isActive
+                    ? "text-foreground"
+                    : "text-muted-foreground/60 hover:text-foreground/80"
+                    }`}
                 >
                   {isActive && (
                     <motion.div
@@ -98,9 +96,8 @@ export default function Navbar() {
                   )}
                   <span className="relative z-10 flex items-center gap-1.5">
                     <span
-                      className={`text-[9px] font-mono transition-colors duration-300 ${
-                        isActive ? "text-primary" : "text-muted-foreground/30 group-hover:text-muted-foreground/50"
-                      }`}
+                      className={`text-[9px] font-mono transition-colors duration-300 ${isActive ? "text-primary" : "text-muted-foreground/30 group-hover:text-muted-foreground/50"
+                        }`}
                     >
                       {item.num}
                     </span>

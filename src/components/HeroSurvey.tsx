@@ -19,7 +19,7 @@ export default function HeroSurvey() {
   return (
     <section className="min-h-screen flex flex-col justify-center section-padding py-20">
       {/* Hero */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -33,7 +33,7 @@ export default function HeroSurvey() {
           <span className="text-primary">Chủ nghĩa xã hội</span>
         </h1>
         <div className="w-24 h-1 bg-primary mb-12" />
-      </motion.div>
+      </motion.div> */}
 
       {/* Survey Card */}
       <motion.div

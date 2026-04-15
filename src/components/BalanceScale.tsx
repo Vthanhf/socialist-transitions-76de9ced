@@ -57,46 +57,93 @@ function ScaleDot({
   fill,
   isError,
   index,
+  id,
+  onRemove,
 }: {
   label: string;
   fill: string;
   isError?: boolean;
   index: number;
+  id?: string;
+  onRemove?: (id: string) => void;
 }) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
-      className="relative"
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
+      className="relative group"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0, opacity: 0 }}
       transition={{ delay: index * 0.05, type: "spring", stiffness: 300 }}
     >
       <div
-        className="w-7 h-7 rounded-full cursor-pointer transition-transform hover:scale-125"
-        style={{ backgroundColor: isError ? ERROR_FILL : fill }}
+        className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl shadow-md transition-all duration-300 hover:-translate-y-1 flex items-center justify-center overflow-hidden border ${onRemove ? "cursor-pointer hover:scale-110" : "cursor-default hover:scale-105"
+          }`}
+        style={{
+          background: isError
+            ? `linear-gradient(135deg, ${ERROR_FILL}, hsl(0 0% 40%))`
+            : `linear-gradient(135deg, ${fill}, color-mix(in srgb, ${fill} 70%, black))`,
+          borderColor: isError ? "hsl(0 0% 50%)" : "rgba(255,255,255,0.25)",
+          boxShadow: "0 4px 12px -2px rgba(0,0,0,0.3)"
+        }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-      />
+        onClick={() => {
+          if (onRemove && id) {
+            setHovered(false);
+            onRemove(id);
+          }
+        }}
+      >
+        {/* Shimmer effect */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+        {/* Remove overlay */}
+        {onRemove && id && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-[2px]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18" height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-white drop-shadow-md"
+            >
+              <path d="M18 6 6 18" /><path d="m6 6 12 12" />
+            </svg>
+          </div>
+        )}
+      </div>
       <AnimatePresence>
         {hovered && (
           <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 text-xs font-semibold whitespace-nowrap z-50 pointer-events-none"
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-2 text-xs font-semibold whitespace-nowrap z-[100] pointer-events-none rounded-lg shadow-xl"
             style={{
               backgroundColor: "hsl(0 0% 10%)",
               color: "hsl(0 0% 100%)",
+              border: "1px solid hsl(0 0% 20%)"
             }}
           >
             {label}
+            {isError && (
+              <span className="block mt-0.5 text-[10px] text-red-400 font-medium opacity-90">Bấm để xóa lựa chọn sai</span>
+            )}
+            {!isError && onRemove && (
+              <span className="block mt-0.5 text-[10px] text-gray-300 font-medium opacity-90">Bấm để gỡ bỏ</span>
+            )}
             <div
               className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0"
               style={{
-                borderLeft: "5px solid transparent",
-                borderRight: "5px solid transparent",
-                borderTop: "5px solid hsl(0 0% 10%)",
+                borderLeft: "6px solid transparent",
+                borderRight: "6px solid transparent",
+                borderTop: "6px solid hsl(0 0% 10%)",
               }}
             />
           </motion.div>
@@ -157,6 +204,23 @@ export default function BalanceScale() {
   // Tilt: starts at -12 (heavy left), approaches 0 as correct items added
   const tiltDeg = balanced ? 0 : -12 + correctCount * 2 + wrongCount * -1;
 
+  const handleRemove = useCallback(
+    (id: string) => {
+      setRightItems((prev) => {
+        const next = prev.filter((item) => item.id !== id);
+        const newCorrectCount = next.filter((i) => !i.isWrong).length;
+        setBalanced(newCorrectCount === 6);
+        return next;
+      });
+      setUsedIds((prev) => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
+    },
+    []
+  );
+
   const handleDrop = useCallback(
     (id: string) => {
       if (usedIds.has(id) || balanced) return;
@@ -199,6 +263,21 @@ export default function BalanceScale() {
 
   return (
     <section className="min-h-screen flex flex-col justify-center section-padding py-24">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-5xl mx-auto w-full"
+      >
+        <p className="text-sm font-semibold tracking-[0.3em] uppercase text-primary mb-6">
+          Kinh tế Chính trị Mác — Lênin
+        </p>
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black leading-[1.05] tracking-tight text-foreground mb-8 text-balance">
+          Vấn đề Dân tộc trong thời kỳ quá độ lên{" "}
+          <span className="text-primary">Chủ nghĩa xã hội</span>
+        </h1>
+        <div className="w-24 h-1 bg-primary mb-12" />
+      </motion.div>
       <div className="max-w-5xl mx-auto w-full">
         {/* Header */}
         <motion.div
@@ -207,16 +286,16 @@ export default function BalanceScale() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-primary mb-4">
+          {/* <p className="text-xs font-semibold tracking-[0.3em] uppercase text-primary mb-4">
             Tương tác
-          </p>
+          </p> */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-foreground mb-3 text-balance">
             Cán cân Bình đẳng Dân tộc
           </h2>
-          <p className="text-base text-muted-foreground mb-2">
+          {/* <p className="text-base text-muted-foreground mb-2">
             Dân tộc và Quan hệ dân tộc ở Việt Nam
-          </p>
-          <div className="w-20 h-1 bg-primary mb-12" />
+          </p> */}
+          {/* <div className="w-20 h-1 bg-primary mb-12" /> */}
         </motion.div>
 
         {/* Scale Visual */}
@@ -296,15 +375,17 @@ export default function BalanceScale() {
               style={{
                 left: "3%",
                 width: "18%",
-                top: "46%",
+                top: "43%",
                 transform: `rotate(${tiltDeg}deg)`,
                 transformOrigin: "center top",
                 transition: "transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
               }}
             >
-              {LEFT_ITEMS.map((item, i) => (
-                <ScaleDot key={item.id} label={item.label} fill={DOT_FILLS[i]} index={i} />
-              ))}
+              <AnimatePresence>
+                {LEFT_ITEMS.map((item, i) => (
+                  <ScaleDot key={item.id} label={item.label} fill={DOT_FILLS[i]} index={i} />
+                ))}
+              </AnimatePresence>
             </div>
 
             {/* Right pan dots */}
@@ -313,21 +394,25 @@ export default function BalanceScale() {
               style={{
                 right: "3%",
                 width: "18%",
-                top: "46%",
+                top: "43%",
                 transform: `rotate(${tiltDeg}deg)`,
                 transformOrigin: "center top",
                 transition: "transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
               }}
             >
-              {rightItems.map((item, i) => (
-                <ScaleDot
-                  key={item.id}
-                  label={item.label}
-                  fill={DOT_FILLS[item.fillIndex]}
-                  isError={item.isWrong}
-                  index={i}
-                />
-              ))}
+              <AnimatePresence>
+                {rightItems.map((item, i) => (
+                  <ScaleDot
+                    key={item.id}
+                    id={item.id}
+                    label={item.label}
+                    fill={DOT_FILLS[item.fillIndex]}
+                    isError={item.isWrong}
+                    index={i}
+                    onRemove={handleRemove}
+                  />
+                ))}
+              </AnimatePresence>
             </div>
           </div>
 

@@ -9,9 +9,9 @@ export default function Index() {
   return (
     <main className="bg-background text-foreground">
       <Navbar />
-      <div id="hero"><HeroSurvey /></div>
+       <div id="balance"><BalanceScale /></div>
       <div className="w-full h-px bg-border" />
-      <div id="balance"><BalanceScale /></div>
+      <div id="hero"><HeroSurvey /></div>
       <div className="w-full h-px bg-border" />
       <div id="section1"><Section1 /></div>
       <div className="w-full h-px bg-border" />
