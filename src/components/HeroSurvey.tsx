@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+
 
 // --------------------------------------------------------
 // SLIDE 1: TÌNH HUỐNG THẢO LUẬN (GIỮ NGUYÊN CẤU TRÚC CŨ)
@@ -152,6 +153,14 @@ const BACKGROUNDS = [
 // --------------------------------------------------------
 export default function HeroSurvey() {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Preload all background images
+  useEffect(() => {
+    BACKGROUNDS.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   const handleNext = () => {
     if (currentIndex < SLIDES.length - 1) setCurrentIndex((prev) => prev + 1);

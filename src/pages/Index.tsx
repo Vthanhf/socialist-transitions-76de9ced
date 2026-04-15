@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
 import Hero from "@/components/Hero";
 import HeroSurvey from "@/components/HeroSurvey";
 import BalanceScale from "@/components/BalanceScale";
@@ -10,6 +11,7 @@ export default function Index() {
   return (
     <main className="bg-background text-foreground">
       <Navbar />
+      <Sidebar />
       <Hero />
       <div className="w-full h-px bg-border" />
       <div id="balance"><BalanceScale /></div>
