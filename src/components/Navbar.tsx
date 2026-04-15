@@ -90,18 +90,20 @@ export default function Navbar() {
             <div className="w-px h-4 bg-border/30 mx-2" />
 
             {/* Khai báo AI */}
-            <a
-              href="#"
+            <Link
+              to="/ai-declaration"
               className="group relative px-2.5 py-1.5 text-[11px] font-medium tracking-wide transition-all duration-300 text-white/80 hover:text-white"
             >
               <span className="relative z-10 flex items-center gap-1.5">
                 Khai báo AI
               </span>
-            </a>
+            </Link>
 
             {/* Trò chơi */}
             <a
-              href="#"
+              href="https://thi-truong-thinh-vuong.lovable.app"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative px-2.5 py-1.5 text-[11px] font-medium tracking-wide transition-all duration-300 text-white/80 hover:text-white"
             >
               <span className="relative z-10 flex items-center gap-1.5">
