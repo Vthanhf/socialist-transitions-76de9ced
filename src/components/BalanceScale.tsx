@@ -27,6 +27,21 @@ const WRONG_ITEMS = [
   { id: "w5", label: "Chỉ hô khẩu hiệu" },
 ];
 
+// Explanations for each item
+const EXPLANATIONS: Record<string, string> = {
+  "c1": "Xây dựng đường xá, cầu cống. Đây là \"mạch máu\" kinh tế; có đường thì hàng hóa mới lưu thông, người dân mới tiếp cận được với thị trường và thế giới bên ngoài.",
+  "c2": "Không chỉ là xóa mù chữ, mà là đào tạo nghề, nâng cao trình độ dân trí. Đây là cách bền vững nhất để người dân tự quyết định vận mệnh của mình.",
+  "c3": "Đưa dịch vụ chăm sóc sức khỏe về tận vùng sâu vùng xa. Đảm bảo nguồn lực con người (sức khỏe) là nền tảng cốt yếu nhất của sự phát triển.",
+  "c4": "Thay vì cho tiền mặt để tiêu xài, Nhà nước cho vay vốn ưu đãi để người dân mua giống, phân bón, máy móc... giúp họ \"học cách câu cá\" thay vì \"nhận con cá\".",
+  "c5": "Phát triển kinh tế nhưng không làm mất đi tiếng nói, trang phục, lễ hội truyền thống. Đây là việc giữ gìn \"hồn cốt\" của mỗi dân tộc trong cộng đồng chung.",
+  "c6": "Đưa internet và kiến thức số về vùng cao. Giúp thu hẹp khoảng cách tri thức giữa miền xuôi và miền ngược ngay lập tức.",
+  "w1": "Chỉ lo phát tiền, gạo cứu trợ mà không tạo ra sinh kế. Điều này dễ tạo tâm lý ỷ lại, chờ đợi vào Nhà nước, khiến người dân khó thoát nghèo bền vững.",
+  "w2": "Bắt các dân tộc thiểu số phải sống, nói và làm mọi thứ y hệt dân tộc đa số. Điều này vi phạm nguyên tắc tôn trọng bản sắc và làm nghèo đi kho tàng văn hóa quốc gia.",
+  "w3": "Có bao nhiêu tiền cũng chia đều mỗi nơi một ít mà không có trọng tâm. Kết quả là công trình nào cũng dở dang, kém hiệu quả, lãng phí nguồn lực quốc gia.",
+  "w4": "Cho phép một nhóm hoặc cá nhân nào đó có quyền lợi vượt lên trên pháp luật hoặc lợi dụng chính sách dân tộc để trục lợi cá nhân. Điều này đi ngược lại nguyên tắc \"Bình đẳng\".",
+  "w5": "Chỉ nói suông về bình đẳng trên văn bản, trong các cuộc họp mà không có hành động thực tế, không có ngân sách và con người thực hiện cụ thể.",
+};
+
 // Accent fills using HSL from design tokens
 const DOT_FILLS = [
   "hsl(348 62% 28%)",      // primary
@@ -158,12 +173,15 @@ function PoolItem({
   item,
   onDrop,
   isCorrect,
+  onShowExplanation,
 }: {
   item: { id: string; label: string };
   onDrop: (id: string) => void;
   isCorrect: boolean;
+  onShowExplanation: (id: string) => void;
 }) {
   const constraintsRef = useRef<HTMLDivElement>(null);
+  const isDraggingRef = useRef(false);
 
   return (
     <div ref={constraintsRef} className="relative">
@@ -171,14 +189,18 @@ function PoolItem({
         drag
         dragSnapToOrigin
         whileDrag={{ scale: 1.08, zIndex: 50 }}
+        onDragStart={() => {
+          isDraggingRef.current = true;
+        }}
         onDragEnd={(_, info) => {
+          isDraggingRef.current = false;
           // Check if dragged upward enough (toward scale area)
           if (info.offset.y < -80) {
             onDrop(item.id);
           }
         }}
        // 1. Thêm 'rounded-xl' để bo góc và 'backdrop-blur-md' để làm mờ phông nền
-        className="px-4 py-2.5 text-sm font-medium cursor-grab active:cursor-grabbing select-none border transition-colors rounded-xl backdrop-blur-md shadow-sm"
+        className="px-4 py-2.5 text-sm font-medium select-none border transition-colors rounded-xl backdrop-blur-md shadow-sm"
         style={{
           // 2. Thêm độ trong suốt (ví dụ: / 0.15) cho màu nền.
           // Nếu ô là đáp án đúng (tùy chọn của bạn), nền sẽ hơi ám đỏ mờ. Nếu bình thường, nền trắng mờ.
@@ -191,11 +213,111 @@ function PoolItem({
           
           // 4. Vì nền trong suốt áp lên ảnh nền tối, ta nên chuyển chữ sang màu Trắng để dễ đọc
           color: "#ffffff",
+          cursor: "grab",
+        }}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          // Chỉ show explanation nếu không phải là drag
+          if (!isDraggingRef.current) {
+            onShowExplanation(item.id);
+          }
         }}
       >
         {item.label}
       </motion.div>
     </div>
+  );
+}
+
+/* ─── Explanation Card Modal ─── */
+function ExplanationCard({
+  itemId,
+  isOpen,
+  onClose,
+}: {
+  itemId: string;
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  const explanation = EXPLANATIONS[itemId];
+  const item = CORRECT_ITEMS.find((i) => i.id === itemId) || WRONG_ITEMS.find((i) => i.id === itemId);
+  const isWrong = WRONG_ITEMS.some((i) => i.id === itemId);
+
+  if (!isOpen || !item) return null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-md w-full rounded-2xl shadow-2xl overflow-hidden"
+            style={{
+              backgroundColor: "hsl(0 0% 20% / 0.85)"
+            }}
+          >
+            {/* Header */}
+            <div className={`p-6 border-b ${isWrong ? "border-white/10" : "border-white/10"}`}>
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <h3 className="text-xl font-black text-white leading-tight">
+                    {item.label}
+                  </h3>
+                </div>
+                <button
+                  onClick={onClose}
+                  className="flex-shrink-0 text-white/60 hover:text-white transition-colors p-1.5"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M18 6l-12 12M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="p-6">
+              <p className="text-white/90 leading-relaxed text-sm sm:text-base">
+                {explanation}
+              </p>
+            </div>
+
+            {/* Footer */}
+            <div className={`p-4 border-t ${isWrong ? "border-white/10 bg-white/5" : "border-white/20 bg-white/5"}`}>
+              <button
+                onClick={onClose}
+                className={`w-full py-2.5 rounded-lg font-semibold transition-all duration-200 ${
+                  isWrong
+                    ? "bg-red-600/80 hover:bg-red-600 text-white"
+                    : "bg-amber-600/80 hover:bg-amber-600 text-white"
+                }`}
+              >
+                Đã hiểu
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -205,6 +327,7 @@ export default function BalanceScale() {
   const [usedIds, setUsedIds] = useState<Set<string>>(new Set());
   const [shaking, setShaking] = useState(false);
   const [balanced, setBalanced] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const scaleControls = useAnimation();
 
   const correctCount = rightItems.filter((i) => !i.isWrong).length;
@@ -448,7 +571,7 @@ export default function BalanceScale() {
             transition={{ delay: 0.3 }}
           >
             <p className="text-xs font-semibold tracking-[0.25em] uppercase text-white/80 mb-4">
-              Kéo thả vào đĩa cân bên phải ↑
+              Kéo thả vào đĩa cân bên phải ↑ (click để xem giải thích)
             </p>
             <div className="flex flex-wrap gap-2.5">
               {[...availableCorrect, ...availableWrong].map((item) => (
@@ -457,6 +580,7 @@ export default function BalanceScale() {
                   item={item}
                   onDrop={handleDrop}
                   isCorrect={CORRECT_ITEMS.some((c) => c.id === item.id)}
+                  onShowExplanation={setSelectedItemId}
                 />
               ))}
             </div>
@@ -506,6 +630,13 @@ export default function BalanceScale() {
         </AnimatePresence>
         </div>
       </div>
+
+      {/* Explanation Modal */}
+      <ExplanationCard
+        itemId={selectedItemId || ""}
+        isOpen={!!selectedItemId}
+        onClose={() => setSelectedItemId(null)}
+      />
     </section>
   );
 }

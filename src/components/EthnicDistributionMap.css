@@ -291,7 +291,7 @@
   width: 420px;
   background-color: #ffffff;
   border-left: 1px solid #e2e8f0;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.08);
   z-index: 1000;
   overflow-y: auto;
   animation: slideInRight 0.3s ease-out;
@@ -357,6 +357,7 @@
   padding: 24px;
   padding-bottom: 32px;
   overflow-y: auto;
+  background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
 }
 
 .detail-name {
@@ -365,26 +366,53 @@
   color: #0f172a;
   margin: 0 0 4px 0;
   word-break: break-word;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .detail-en-name {
   font-size: 14px;
   color: #64748b;
-  margin: 0 0 16px 0;
+  margin: 0 0 20px 0;
   font-weight: 500;
+  font-style: italic;
 }
 
 .detail-section {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  padding: 14px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.detail-section:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .detail-label {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #94a3b8;
+  letter-spacing: 0.8px;
+  color: #64748b;
   margin: 0 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detail-label::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  background-color: #3b82f6;
+  border-radius: 50%;
 }
 
 .detail-value {
@@ -392,6 +420,7 @@
   line-height: 1.6;
   color: #334155;
   margin: 0;
+  font-weight: 500;
 }
 
 .detail-regions {
@@ -402,16 +431,19 @@
 
 .detail-region-badge {
   display: inline-block;
-  background-color: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  padding: 6px 12px;
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  border: 1px solid #bfdbfe;
+  padding: 6px 14px;
   border-radius: 20px;
   font-size: 12px;
-  color: #475569;
+  color: #1e40af;
+  font-weight: 500;
   transition: all 0.2s ease;
 }
 
 .detail-region-badge:hover {
-  background-color: #e2e8f0;
-  border-color: #cbd5e1;
+  background: linear-gradient(135deg, #bfdbfe 0%, #c7d2fe 100%);
+  border-color: #93c5fd;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.15);
 }
