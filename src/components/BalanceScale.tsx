@@ -177,11 +177,20 @@ function PoolItem({
             onDrop(item.id);
           }
         }}
-        className="px-4 py-2.5 text-sm font-medium cursor-grab active:cursor-grabbing select-none border transition-colors"
+       // 1. Thêm 'rounded-xl' để bo góc và 'backdrop-blur-md' để làm mờ phông nền
+        className="px-4 py-2.5 text-sm font-medium cursor-grab active:cursor-grabbing select-none border transition-colors rounded-xl backdrop-blur-md shadow-sm"
         style={{
-          backgroundColor: isCorrect ? "hsl(var(--crimson-muted))" : "hsl(var(--surface))",
-          borderColor: "hsl(var(--border))",
-          color: "hsl(var(--foreground))",
+          // 2. Thêm độ trong suốt (ví dụ: / 0.15) cho màu nền.
+          // Nếu ô là đáp án đúng (tùy chọn của bạn), nền sẽ hơi ám đỏ mờ. Nếu bình thường, nền trắng mờ.
+          backgroundColor: isCorrect 
+            ? "hsl(var(--crimson-muted) / 0.3)" 
+            : "rgba(255, 255, 255, 0.15)",
+            
+          // 3. Viền cũng làm hơi trong suốt để bắt sáng đẹp hơn
+          borderColor: "rgba(255, 255, 255, 0.2)",
+          
+          // 4. Vì nền trong suốt áp lên ảnh nền tối, ta nên chuyển chữ sang màu Trắng để dễ đọc
+          color: "#ffffff",
         }}
       >
         {item.label}
@@ -262,34 +271,36 @@ export default function BalanceScale() {
   const availableWrong = WRONG_ITEMS.filter((i) => !usedIds.has(i.id));
 
   return (
-    <section className="min-h-screen flex flex-col justify-center section-padding py-24">
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="max-w-5xl mx-auto w-full"
-      >
-        <p className="text-sm font-semibold tracking-[0.3em] uppercase text-primary mb-6">
-          Kinh tế Chính trị Mác — Lênin
-        </p>
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black leading-[1.05] tracking-tight text-foreground mb-8 text-balance">
-          Vấn đề Dân tộc trong thời kỳ quá độ lên{" "}
-          <span className="text-primary">Chủ nghĩa xã hội</span>
-        </h1>
-        <div className="w-24 h-1 bg-primary mb-12" />
-      </motion.div>
-      <div className="max-w-5xl mx-auto w-full">
+    <section className="relative min-h-screen flex flex-col justify-center section-padding py-24 overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/assets/bg1.webp')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        }}
+      />
+
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/30" />
+
+      {/* Content */}
+      <div className="relative z-10">
+        <div className="max-w-5xl mx-auto w-full">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="text-center mb-8"
         >
           {/* <p className="text-xs font-semibold tracking-[0.3em] uppercase text-primary mb-4">
             Tương tác
           </p> */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-foreground mb-3 text-balance">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white text-balance">
             Cán cân Bình đẳng Dân tộc
           </h2>
           {/* <p className="text-base text-muted-foreground mb-2">
@@ -419,12 +430,12 @@ export default function BalanceScale() {
           {/* Pan Labels */}
           <div className="w-full max-w-[560px] flex justify-between mt-2 px-2">
             <div className="text-center" style={{ width: "30%" }}>
-              <p className="text-xs font-bold text-foreground">Vị thế tương đồng</p>
-              <p className="text-[10px] text-muted-foreground">Bình đẳng pháp lý</p>
+              <p className="text-xs font-bold text-white">Vị thế tương đồng</p>
+              <p className="text-[10px] text-white/80">Bình đẳng pháp lý</p>
             </div>
             <div className="text-center" style={{ width: "30%" }}>
-              <p className="text-xs font-bold text-foreground">Cơ hội đồng đều</p>
-              <p className="text-[10px] text-muted-foreground">Bình đẳng thực tế</p>
+              <p className="text-xs font-bold text-white">Cơ hội đồng đều</p>
+              <p className="text-[10px] text-white/80">Bình đẳng thực tế</p>
             </div>
           </div>
         </motion.div>
@@ -436,7 +447,7 @@ export default function BalanceScale() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <p className="text-xs font-semibold tracking-[0.25em] uppercase text-muted-foreground mb-4">
+            <p className="text-xs font-semibold tracking-[0.25em] uppercase text-white/80 mb-4">
               Kéo thả vào đĩa cân bên phải ↑
             </p>
             <div className="flex flex-wrap gap-2.5">
@@ -459,7 +470,7 @@ export default function BalanceScale() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="mt-4 text-sm font-semibold text-muted-foreground"
+              className="mt-4 text-sm font-semibold text-white/80"
             >
               Lựa chọn này không giúp cân bằng thực tế…
             </motion.p>
@@ -473,22 +484,27 @@ export default function BalanceScale() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="mt-12 border-l-4 border-primary p-8 sm:p-10"
-              style={{ backgroundColor: "hsl(var(--crimson-muted))" }}
+              // 1. Thêm 'rounded-r-2xl' để bo các góc bên phải (giữ góc trái vuông vức để hợp với border-l)
+              // 2. Thêm 'backdrop-blur-md' để làm mờ cảnh phía sau (hiệu ứng kính)
+              className="mt-12 border-l-4 border-primary p-8 sm:p-10 rounded-r-2xl backdrop-blur-md"
+              
+              // 3. Chỉnh lại độ trong suốt của màu nền (ví dụ: thêm / 0.15 tức là độ mờ 15%)
+              style={{ backgroundColor: "hsl(var(--crimson-muted) / 0.15)" }}
             >
-              <p className="text-xs font-semibold tracking-[0.25em] uppercase text-primary mb-4">
+              <p className="text-xs font-semibold tracking-[0.25em] uppercase text-white mb-4">
                 Cân bằng hoàn hảo
               </p>
-              <p className="text-xl sm:text-2xl font-black text-foreground leading-snug mb-4">
+              <p className="text-xl sm:text-2xl font-black text-white leading-snug mb-4">
                 Bình đẳng dân tộc thực sự = Bình đẳng Pháp lý + Bình đẳng Thực tế.
               </p>
-              <p className="text-base text-muted-foreground leading-relaxed">
+              <p className="text-base text-white/80 leading-relaxed">
                 Chấp nhận sự chênh lệch khách quan và hỗ trợ cơ hội đồng đều mới là cốt lõi
                 của Chủ nghĩa Mác - Lênin.
               </p>
             </motion.div>
           )}
         </AnimatePresence>
+        </div>
       </div>
     </section>
   );

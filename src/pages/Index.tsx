@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
 import HeroSurvey from "@/components/HeroSurvey";
 import BalanceScale from "@/components/BalanceScale";
 import Section1 from "@/components/Section1";
@@ -9,7 +10,9 @@ export default function Index() {
   return (
     <main className="bg-background text-foreground">
       <Navbar />
-       <div id="balance"><BalanceScale /></div>
+      <Hero />
+      <div className="w-full h-px bg-border" />
+      <div id="balance"><BalanceScale /></div>
       <div className="w-full h-px bg-border" />
       <div id="hero"><HeroSurvey /></div>
       <div className="w-full h-px bg-border" />

@@ -9,19 +9,20 @@ const CHARACTERISTICS = [
 
 export default function Section3() {
   return (
-    <section className="min-h-screen flex flex-col justify-center section-padding py-24">
-      <div className="max-w-6xl mx-auto w-full">
+    <section className="min-h-screen flex flex-col justify-center section-padding py-24 bg-surface relative" style={{ backgroundImage: 'url(/assets/bg8.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
+      <div className="absolute inset-0 bg-black/30" />
+      <div className="max-w-6xl mx-auto w-full relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-primary mb-4">Phần III</p>
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight text-foreground mb-6 text-balance">
+          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-gold mb-4">Phần III</p>
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight text-white mb-6 text-balance">
             Dân tộc và Quan hệ dân tộc ở Việt Nam
           </h2>
-          <div className="w-20 h-1 bg-primary mb-16" />
+          <div className="w-20 h-1 bg-gold mb-16" />
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
@@ -32,7 +33,7 @@ export default function Section3() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-xs font-semibold tracking-[0.25em] uppercase text-muted-foreground mb-8">
+            <p className="text-xs font-semibold tracking-[0.25em] uppercase text-white mb-8">
               Đặc điểm dân tộc Việt Nam
             </p>
             <div className="space-y-6">
@@ -45,10 +46,10 @@ export default function Section3() {
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                   className="flex items-start gap-6"
                 >
-                  <span className="text-3xl font-black text-primary/20 shrink-0 leading-none mt-1">
+                  <span className="text-3xl font-black text-white/70 shrink-0 leading-none mt-1">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="text-base sm:text-lg text-foreground leading-relaxed border-b border-border pb-6 w-full">
+                  <p className="text-base sm:text-lg text-white/80 leading-relaxed border-b border-white/10 pb-6 w-full">
                     {c}
                   </p>
                 </motion.div>
@@ -63,28 +64,28 @@ export default function Section3() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            <p className="text-xs font-semibold tracking-[0.25em] uppercase text-muted-foreground mb-8">
+            <p className="text-xs font-semibold tracking-[0.25em] uppercase text-white mb-8">
               Quan điểm, chính sách của Đảng
             </p>
 
             {/* Pull quote */}
-            <div className="border-l-4 border-primary pl-6 sm:pl-8 mb-10">
-              <p className="text-2xl sm:text-3xl font-black text-foreground leading-snug text-balance">
-                "Bình đẳng, đoàn kết, tôn trọng, giúp nhau cùng phát triển"
+            <div className="border-l-4 border-white pl-6 sm:pl-8 mb-10">
+              <p className="text-2xl sm:text-3xl font-black text-white leading-snug text-balance">
+                "Đắc đằng, đoàn kết, tôn trọng, giúp nhau cùng phát triển"
               </p>
-              <p className="text-sm text-muted-foreground mt-3">— Quan điểm cốt lõi</p>
+              <p className="text-sm text-white/70 mt-3">— Quan điểm cốt lõi</p>
             </div>
 
             <div className="space-y-6">
-              <div className="bg-crimson-muted p-6 sm:p-8">
-                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-3">Mục tiêu</p>
-                <p className="text-base leading-relaxed text-foreground">
-                  Ưu tiên đầu tư phát triển kinh tế — xã hội vùng đồng bào dân tộc thiểu số, vùng sâu, vùng xa.
+              <div className="border border-white/10 p-6 sm:p-8 bg-white/5">
+                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-white mb-3">Mục tiêu</p>
+                <p className="text-base leading-relaxed text-white/80">
+                  Ư u tiên đầu tư phát triển kinh tế — xã hội vùng đờng bào dân tộc thiếu số, vùng sâu, vùng xa.
                 </p>
               </div>
-              <div className="bg-gold-muted p-6 sm:p-8">
-                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-3">Bản sắc</p>
-                <p className="text-base leading-relaxed text-foreground">
+              <div className="border border-white/10 p-6 sm:p-8 bg-white/5">
+                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-white mb-3">Bản sắc</p>
+                <p className="text-base leading-relaxed text-white/80">
                   Tôn trọng và phát huy bản sắc văn hóa đa dạng của các dân tộc Việt Nam.
                 </p>
               </div>
