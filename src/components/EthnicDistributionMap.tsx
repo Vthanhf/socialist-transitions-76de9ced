@@ -53,6 +53,17 @@ const EthnicDistributionMap: React.FC = () => {
   });
   const mapRef = useRef<HTMLDivElement>(null);
 
+  // 🧠 Smart Preload: Tự động preload ảnh của các dân tộc được chọn
+  React.useEffect(() => {
+    selectedEthnicGroups.forEach((selected) => {
+      const ethnic = ethnicGroupsData.find(e => e.id === selected.id);
+      if (ethnic?.image) {
+        const img = new Image();
+        img.src = ethnic.image;
+      }
+    });
+  }, [selectedEthnicGroups]);
+
   const filteredEthnicGroups = useMemo(() => {
     return ethnicGroupsData.filter(
       (group) =>
@@ -74,8 +85,15 @@ const EthnicDistributionMap: React.FC = () => {
     return population.toLocaleString('vi-VN');
   };
 
+  // Preload image vào browser cache
+  const preloadImage = useCallback((src: string) => {
+    if (!src) return;
+    const img = new Image();
+    img.src = src;
+  }, []);
+
   const handleCircleHover = useCallback(
-    (event: React.MouseEvent<SVGCircleElement>, ethnicName: string, region: string, population: string, language: string) => {
+    (event: React.MouseEvent<SVGCircleElement>, ethnicName: string, region: string, population: string, language: string, ethnicId: string) => {
       const rect = (event.currentTarget as SVGCircleElement).getBoundingClientRect();
       setTooltip({
         x: rect.left,
@@ -85,8 +103,14 @@ const EthnicDistributionMap: React.FC = () => {
         population,
         language
       });
+      
+      // 🎯 Preload on Hover: Tải ảnh âm thầm trong khi người dùng hover
+      const ethnic = ethnicGroupsData.find(e => e.id === ethnicId);
+      if (ethnic?.image) {
+        preloadImage(ethnic.image);
+      }
     },
-    []
+    [preloadImage]
   );
 const handleCircleLeave = useCallback(() => {
   setTooltip((prev) => ({
@@ -154,7 +178,8 @@ const renderEthnicCircles = () => {
                   ethnic.name,
                   region,
                   formatPopulation(ethnic.population),
-                  ethnic.language
+                  ethnic.language,
+                  ethnic.id
                 )
               }
               onMouseLeave={handleCircleLeave}
