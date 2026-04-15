@@ -68,4 +68,6 @@ export const provinceCoordinates: Record<string, { lat: number; lng: number }> =
   "Sóc Trăng": { lat: 9.6, lng: 105.9667 },
   "Bạc Liêu": { lat: 9.2833, lng: 105.7167 },
   "Cà Mau": { lat: 9.1833, lng: 104.9167 },
+  "Hà Sơn Bình": { lat: 20.8415, lng: 105.5203 }, // Tỉnh cũ (nay là Hòa Bình và một phần Hà Nội), tọa độ lấy ở khu vực trung tâm giao thoa.
+  "Khammouane": { lat: 17.7972, lng: 105.9080 }, // Tỉnh Khăm Muộn của nước bạn Lào (nơi giáp ranh có dân tộc Rục sinh sống).
 };

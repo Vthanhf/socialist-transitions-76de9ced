@@ -1,7 +1,8 @@
 import React, { useState, useMemo, useRef, useCallback } from "react";
 import { ComposableMap, ZoomableGroup, Geographies, Geography, Marker } from "react-simple-maps";
 import { Link } from "react-router-dom";
-import { ethnicGroupsData, provinceCoordinates } from "@/data/ethnicGroupsData";
+import { ethnicGroupsData, } from "@/data/ethnicGroupsData";
+import { provinceCoordinates } from "@/data/provinceCoordinates";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -41,6 +42,7 @@ const SIMPLE_VIETNAM_GEOJSON = {
 const EthnicDistributionMap: React.FC = () => {
   const [selectedEthnicGroups, setSelectedEthnicGroups] = useState<SelectedEthnic[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedDetailId, setSelectedDetailId] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<TooltipData>({
     x: 0,
     y: 0,
@@ -156,6 +158,7 @@ const renderEthnicCircles = () => {
                 )
               }
               onMouseLeave={handleCircleLeave}
+              onClick={() => setSelectedDetailId(ethnic.id)}
               style={{
                 filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))",
                 transition: "all 0.2s ease"
@@ -369,6 +372,79 @@ const renderEthnicCircles = () => {
           </div>
         )}
 
+        {/* Detail Panel */}
+        {selectedDetailId && (() => {
+          const selectedGroup = ethnicGroupsData.find(g => g.id === selectedDetailId);
+          return selectedGroup ? (
+            <div className="ethnic-detail-panel">
+              <button 
+                className="detail-close-btn"
+                onClick={() => setSelectedDetailId(null)}
+              >
+                ✕
+              </button>
+              <div className="detail-image">
+                {selectedGroup.image && (
+                  <img 
+                    src={selectedGroup.image} 
+                    alt={selectedGroup.name}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = 'none';
+                    }}
+                  />
+                )}
+              </div>
+              <div className="detail-content">
+                <h2 className="detail-name">{selectedGroup.name}</h2>
+                <p className="detail-en-name">{selectedGroup.enName}</p>
+                
+                <div className="detail-section">
+                  <h4 className="detail-label">Dân số</h4>
+                  <p className="detail-value">{formatPopulation(selectedGroup.population)} người</p>
+                </div>
+
+                <div className="detail-section">
+                  <h4 className="detail-label">Ngôn ngữ</h4>
+                  <p className="detail-value">{selectedGroup.language}</p>
+                </div>
+
+                {selectedGroup.clothing && (
+                  <div className="detail-section">
+                    <h4 className="detail-label">Trang phục</h4>
+                    <p className="detail-value">{selectedGroup.clothing}</p>
+                  </div>
+                )}
+
+                {selectedGroup.traditions && (
+                  <div className="detail-section">
+                    <h4 className="detail-label">Truyền thống</h4>
+                    <p className="detail-value">{selectedGroup.traditions}</p>
+                  </div>
+                )}
+
+                <div className="detail-section">
+                  <h4 className="detail-label">Mô tả</h4>
+                  <p className="detail-value">{selectedGroup.description}{selectedGroup.hint}</p>
+                </div>
+
+                {selectedGroup.regions && selectedGroup.regions.length > 0 && (
+                  <div className="detail-section">
+                    <h4 className="detail-label">Vùng phân bố</h4>
+                    <div className="detail-regions">
+                      {selectedGroup.regions.slice(0, 5).map((region, idx) => (
+                        <span key={idx} className="detail-region-badge">{region}</span>
+                      ))}
+                      {selectedGroup.regions.length > 5 && (
+                        <span className="detail-region-badge">+{selectedGroup.regions.length - 5}</span>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : null;
+        })()}
+
         {/* Sources section */}
         <div className="sources-footer">
           <div className="sources-content">
@@ -389,6 +465,15 @@ const renderEthnicCircles = () => {
               className="sources-link"
             >
               Cơm - Cộng đồng 54 dân tộc
+            </a>
+            <span className="sources-separator">•</span>
+            <a 
+              href="https://dantocmiennui.baotintuc.vn/nations.html" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="sources-link"
+            >
+              Báo Tin Tức - Dân tộc miền núi
             </a>
           </div>
         </div>
