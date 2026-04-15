@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const SIDEBAR_ITEMS = [
   { id: "home", label: "Trang chủ", icon: "🏠" },
-  { id: "balance", label: "Cán cân khảo sát", icon: "⚖️" },
+  { id: "balance", label: "Cán cân ", icon: "⚖️" },
   { id: "hero", label: "Khảo sát Dân tộc", icon: "📊" },
   { id: "section1", label: "Dân tộc", icon: "🌍" },
   { id: "section2", label: "Mác-Lênin", icon: "📖" },
