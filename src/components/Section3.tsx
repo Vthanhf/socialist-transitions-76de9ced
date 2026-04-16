@@ -71,7 +71,7 @@ export default function Section3() {
             {/* Pull quote */}
             <div className="border-l-4 border-white pl-6 sm:pl-8 mb-10">
               <p className="text-2xl sm:text-3xl font-black text-white leading-snug text-balance">
-                "Đắc đằng, đoàn kết, tôn trọng, giúp nhau cùng phát triển"
+                "Bình đẳng, đoàn kết, tôn trọng, giúp nhau cùng phát triển"
               </p>
               <p className="text-sm text-white/70 mt-3">— Quan điểm cốt lõi</p>
             </div>
