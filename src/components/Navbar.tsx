@@ -59,9 +59,12 @@ export default function Navbar() {
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-11">
           {/* Left: Title + active section indicator */}
           <div className="flex items-center gap-3">
-            <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-white">
+            <Link
+              to="/"
+              className="text-[10px] font-bold tracking-[0.25em] uppercase text-white hover:text-white/80 transition-colors"
+            >
               Chính trị học
-            </span>
+            </Link>
             {activeIndex >= 0 && (
               <motion.span
                 key={active}

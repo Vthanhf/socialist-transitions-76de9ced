@@ -38,10 +38,20 @@ const INTEGRITY_POINTS = [
 
 export default function AIDeclaration() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div 
+      className="min-h-screen relative"
+      style={{
+        backgroundImage: 'url(/assets/AI1.jpg)',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/50"></div>
+      
       <Navbar />
 
-      <div className="pt-24 pb-16 px-4">
+      <div className="pt-24 pb-16 px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <motion.div
@@ -53,10 +63,10 @@ export default function AIDeclaration() {
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 mb-6 shadow-lg shadow-blue-500/25">
               <Bot className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-3">
+            <h1 className="text-4xl font-bold text-white mb-3">
               Khai báo sử dụng AI
             </h1>
-            <p className="text-gray-600 text-lg max-w-xl mx-auto">
+            <p className="text-gray-200 text-lg max-w-xl mx-auto">
               Thông tin minh bạch về các công cụ AI được sử dụng trong dự án
             </p>
           </motion.div>
@@ -68,15 +78,15 @@ export default function AIDeclaration() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mb-12"
           >
-            <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-3">
+            <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-3">
               <span className="flex items-center justify-center w-8 h-8 rounded-xl bg-blue-100 text-blue-600 font-bold">1</span>
               Bảng sử dụng AI
             </h2>
 
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-              <div className="grid grid-cols-12 gap-4 p-5 bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-100">
-                <div className="col-span-4 font-semibold text-gray-700">Công cụ AI</div>
-                <div className="col-span-8 font-semibold text-gray-700">Mục đích sử dụng</div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 overflow-hidden">
+              <div className="grid grid-cols-12 gap-4 p-5 bg-black/20 border-b border-white/10">
+                <div className="col-span-4 font-semibold text-white">Công cụ AI</div>
+                <div className="col-span-8 font-semibold text-white">Mục đích sử dụng</div>
               </div>
               {AI_TOOLS.map((tool, index) => (
                 <motion.div
@@ -84,15 +94,15 @@ export default function AIDeclaration() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
-                  className={`grid grid-cols-12 gap-4 p-5 items-center ${index !== AI_TOOLS.length - 1 ? "border-b border-gray-50" : ""} hover:bg-gray-50/80 transition-colors`}
+                  className={`grid grid-cols-12 gap-4 p-5 items-center ${index !== AI_TOOLS.length - 1 ? "border-b border-white/10" : ""} hover:bg-white/5 transition-colors`}
                 >
                   <div className="col-span-4 flex items-center gap-3">
                     <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${tool.color} flex items-center justify-center shadow-md`}>
                       <tool.icon className="w-6 h-6 text-white" />
                     </div>
-                    <span className="font-semibold text-gray-900">{tool.name}</span>
+                    <span className="font-semibold text-white">{tool.name}</span>
                   </div>
-                  <div className="col-span-8 text-gray-600 leading-relaxed">
+                  <div className="col-span-8 text-gray-200 leading-relaxed">
                     {tool.description}
                   </div>
                 </motion.div>
@@ -107,7 +117,7 @@ export default function AIDeclaration() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="mb-12"
           >
-            <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-3">
+            <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-3">
               <span className="flex items-center justify-center w-8 h-8 rounded-xl bg-green-100 text-green-600 font-bold">2</span>
               Liêm chính Học thuật
             </h2>
@@ -119,15 +129,15 @@ export default function AIDeclaration() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
-                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                  className="bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-white/20 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-6 h-6 text-green-600" />
+                    <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-6 h-6 text-green-200" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2 text-lg">{item.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{item.content}</p>
+                      <h3 className="font-semibold text-white mb-2 text-lg">{item.title}</h3>
+                      <p className="text-gray-200 leading-relaxed">{item.content}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -140,9 +150,9 @@ export default function AIDeclaration() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="bg-amber-50 rounded-xl p-5 border border-amber-100"
+            className="bg-orange-500/20 backdrop-blur-sm rounded-xl p-5 border border-orange-300/50"
           >
-            <p className="text-amber-800 text-sm">
+            <p className="text-orange-100 text-sm">
               <span className="font-semibold">Lưu ý:</span> Nội dung học thuật (chính trị, lịch sử, kinh tế) do người dùng chịu trách nhiệm. AI chỉ hỗ trợ kỹ thuật và thiết kế.
             </p>
           </motion.div>
