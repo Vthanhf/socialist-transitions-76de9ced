@@ -469,7 +469,7 @@ const getElevationColor = (provinceName: string) => {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 400, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed right-6  top-20 z-30 w-72 h-96 rounded-2xl border border-white/50 shadow-2xl overflow-hidden group"
+            className="fixed right-6  top-20 z-30 w-56 h-64 rounded-2xl border border-white/50 shadow-2xl overflow-hidden group"
             style={{
               backgroundImage: 'url(/assets/bando.avif)',
               backgroundSize: 'cover',
@@ -484,17 +484,17 @@ const getElevationColor = (provinceName: string) => {
                 onClick={() => setShowRealMapModal(true)}
                 className="flex-1 cursor-pointer hover:opacity-80 transition-opacity flex items-center justify-center"
               >
-                <h3 className="text-xl font-black text-white drop-shadow-lg">
+                <h3 className="text-lg font-black text-white drop-shadow-lg">
                   🗺️ Bản đồ thực tế
                 </h3>
               </div>
               
               <button
                 onClick={() => setShowRealMap(false)}
-                className="w-8 h-8 rounded-lg  hover:bg-white/10 flex items-center justify-center transition-all self-end"
+                className="w-7 h-7 rounded-lg hover:bg-white/10 flex items-center justify-center transition-all self-end"
                 title="Ẩn bản đồ"
               >
-                <span className="text-lg">→</span>
+                <span className="text-base">→</span>
               </button>
             </div>
           </motion.div>
@@ -547,63 +547,63 @@ const getElevationColor = (provinceName: string) => {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 400, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed right-6 bottom-20 z-30 w-72 bg-white/30 backdrop-blur-2xl rounded-2xl border border-white/50 shadow-2xl overflow-hidden"
+            className="fixed right-6 bottom-20 z-30 w-56 bg-white/30 backdrop-blur-2xl rounded-2xl border border-white/50 shadow-2xl overflow-hidden"
           >
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-5">
-                <h3 className="text-lg font-black text-slate-800 flex items-center gap-2">
-                  📊 Chú thích độ cao
+            <div className="p-4">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-base font-black text-slate-800 flex items-center gap-1">
+                  📊 Chú thích
                 </h3>
                 <button
                   onClick={() => setShowElevationLegend(false)}
                 >
-                  <span className="text-lg">→</span>
+                  <span className="text-base">→</span>
                 </button>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {/* Màu 1: Đỏ - Rất cao */}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg shadow-md" style={{ backgroundColor: "#b91c1c" }} />
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg shadow-md" style={{ backgroundColor: "#b91c1c" }} />
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-slate-800">Núi cao</p>
-                    <p className="text-xs text-slate-600">≥ 800m</p>
+                    <p className="text-xs font-bold text-slate-800">Núi cao</p>
+                    <p className="text-[10px] text-slate-600">≥ 800m</p>
                   </div>
                 </div>
 
                 {/* Màu 2: Đỏ nhạt - Cao */}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg shadow-md" style={{ backgroundColor: "#f87171" }} />
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg shadow-md" style={{ backgroundColor: "#f87171" }} />
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-slate-800">Núi thấp & Cao nguyên</p>
-                    <p className="text-xs text-slate-600">400m - 799m</p>
+                    <p className="text-xs font-bold text-slate-800">Núi thấp</p>
+                    <p className="text-[10px] text-slate-600">400-799m</p>
                   </div>
                 </div>
 
                 {/* Màu 3: Vàng - Trung du */}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg shadow-md" style={{ backgroundColor: "#fde047" }} />
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg shadow-md" style={{ backgroundColor: "#fde047" }} />
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-slate-800">Trung du & Đồi lượn sóng</p>
-                    <p className="text-xs text-slate-600">100m - 399m</p>
+                    <p className="text-xs font-bold text-slate-800">Trung du</p>
+                    <p className="text-[10px] text-slate-600">100-399m</p>
                   </div>
                 </div>
 
                 {/* Màu 4: Xanh nhạt - Ven biển */}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg shadow-md" style={{ backgroundColor: "#93c5fd" }} />
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg shadow-md" style={{ backgroundColor: "#93c5fd" }} />
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-slate-800">Bán sơn địa & Thềm phù sa cổ</p>
-                    <p className="text-xs text-slate-600">50m - 99m</p>
+                    <p className="text-xs font-bold text-slate-800">Bán sơn địa</p>
+                    <p className="text-[10px] text-slate-600">50-99m</p>
                   </div>
                 </div>
 
                 {/* Màu 5: Xanh đậm - Đồng bằng */}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg shadow-md" style={{ backgroundColor: "#3b82f6" }} />
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg shadow-md" style={{ backgroundColor: "#3b82f6" }} />
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-slate-800">Đồng bằng & Hạ lưu sông</p>
-                    <p className="text-xs text-slate-600">&lt; 50m</p>
+                    <p className="text-xs font-bold text-slate-800">Đồng bằng</p>
+                    <p className="text-[10px] text-slate-600">&lt; 50m</p>
                   </div>
                 </div>
               </div>
