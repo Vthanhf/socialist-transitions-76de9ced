@@ -71,6 +71,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     language: "Tiếng Mường",
     hint: "Đời sống kinh tế ổn định nhờ giao thoa tốt với miền xuôi. Tuy nhiên, thanh niên hiện nay ít người còn biết đánh cồng chiêng hay nói trôi chảy tiếng mẹ đẻ.",
     image: "/assets/Muong.avif",
+    clothing: "Áo dài, váy truyền thống",
+    traditions: "Cồng chiêng, Tết cổ",
     color: "#95E1D3"
   },
   {
@@ -97,6 +99,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     language: "Tiếng Hoa",
     hint: "Họ là những thương nhân tài ba ở các thành phố lớn. Con cái được tiếp cận y tế, giáo dục hàng đầu. Đổi lại, các bang hội cổ và tiếng nói riêng bị đồng hóa rất mạnh.",
     image: "/assets/Hoa.avif",
+    clothing: "Áo dài Hoa, quần vải đen",
+    traditions: "Tết Nguyên Đán, Trung Thu",
     color: "#C7CEEA"
   },
   {
@@ -109,6 +113,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     hint: "Nhờ trồng cà phê, cao su, kinh tế và y tế có khởi sắc rõ rệt. Đáng buồn thay, rừng cạn kiệt khiến những ngôi nhà dài không còn gỗ cất, chế độ mẫu hệ mờ nhạt dần.",
     image: "/assets/EDe.avif",
     language: "Tiếng Ê Đê",
+    clothing: "Váy thêu, áo khoác đỏ nâu",
+    traditions: "Lễ hội Ốc Om Ốc, Nhà dài",
     color: "#F38181"
   },
   {
@@ -121,6 +127,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     hint: "Sở hữu ngôi nhà Rông vút cao giữa đại ngàn. Các bản làng vẫn giữ truyền thống, nhưng đường xa cách trở khiến học sinh thiếu lớp học kiên cố.",
     image: "/assets/BaNa.avif",
     language: "Tiếng Ba Na",
+    clothing: "Áo vải đen, váy xòe đỏ",
+    traditions: "Nhà Rông, Lễ hội Gừa",
     color: "#AA96DA"
   },
   {
@@ -133,6 +141,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     image: "/assets/GiaRai.avif",
     hint: "Văn hóa nhà mồ và cồng chiêng Tây Nguyên rực rỡ. Dù vậy, đất canh tác bạc màu, đầu ra nông sản kém khiến cái nghèo vẫn đeo bám nhiều bản làng.",
     language: "Tiếng Gia Rai",
+    clothing: "Váy cúp, áo vải thêu",
+    traditions: "Cồng chiêng, Lễ hội mộc",
     color: "#FCBAD3"
   },
   {
@@ -145,6 +155,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     hint: "Sống trên đỉnh núi mây mù, giữ gìn hoàn hảo tục bắt vợ và dệt lanh. Đổi lại, kinh tế nương rẫy bấp bênh, trẻ em thiếu áo ấm và phải đi bộ rất xa để học chữ.",
     description: "Dân tộc Mông sinh sống ở các vùng cao nguyên phía bắc. Nổi tiếng với những bộ trang phục đầy màu sắc và các lễ hội Tết cổ truyền.",
     language: "Tiếng Mông",
+    clothing: "Áo thêu màu sắc, quần xanh, turban",
+    traditions: "Tết cổ truyền, Dệt lanh",
     color: "#A8D8EA"
   },
   {
@@ -157,6 +169,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     hint: "Giữ được chữ Nôm Dao và lễ cấp sắc uy nghi. Vì sống phân tán ở những nơi heo hút, đường đi lại sạt lở khiến việc khám chữa bệnh gặp vô vàn trở ngại.",
     description: "Dân tộc Dao phân bố rải rác ở vùng cao phía bắc Việt Nam. Có nhiều chi tộc khác nhau với những khác biệt về phong tục và trang phục.",
     language: "Tiếng Dao",
+    clothing: "Áo đen thêu hoa, turban đỏ",
+    traditions: "Lễ cấp sắc, Tết nguyên đán",
     color: "#FFAFCC"
   },
   {
@@ -169,6 +183,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Sơn La", "Hòa Bình", "Nghệ An", "Hà Tĩnh", "Quảng Bình"],
     description: "Dân tộc Lào sống ở vùng tây bắc gần giáp biên giới Lào. Có nền văn hóa tương tự nhân dân Lào với những đặc trưng riêng.",
     language: "Tiếng Lào",
+    clothing: "Áo pha sin, váy Lào",
+    traditions: "Lễ hội Té nước, Múa Xòe",
     color: "#FFC0CB"
   },
   {
@@ -181,6 +197,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Lô Lô có số lượng nhỏ, phân bố ở các huyện cao nguyên. Là dân tộc ít người nhưng có nền văn hóa độc đáo.",
     language: "Tiếng Lô Lô",
     hint: "Dù ít người nhưng sở hữu điệu múa trống đồng cổ xưa rực rỡ nhất Hà Giang. Khí hậu đá tai mèo khắc nghiệt cản trở kinh tế, y tế vô cùng thiếu thốn.",
+    clothing: "Áo vải đen, quần xanh, dây chun cổ",
+    traditions: "Múa trống đồng, Tết nguyên đán",
     color: "#B5EAD7"
   },
   {
@@ -193,6 +211,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Tuyên Quang", "Thái Nguyên", "Bắc Kạn"],
     description: "Dân tộc Sán Chay sinh sống ở các vùng cao, gần biên giới Trung Quốc. Có phong tục ăn Tết rất độc đáo.",
     language: "Tiếng Sán Chay",
+    clothing: "Áo thêu, váy sọc",
+    traditions: "Hát Sấng Cọ, Múa xúc tép",
     color: "#C1E1EC"
   },
   {
@@ -205,6 +225,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Sơn La", "Lai Châu", "Điện Biên"],
     description: "Dân tộc Kho Mú có nền văn hóa độc đáo, phân bố ở vùng tây bắc. Chủ yếu sống trong các khu vực rừng và cao nguyên.",
     language: "Tiếng Kho Mú",
+    clothing: "Áo thêu, quần vải",
+    traditions: "Dệt thổ cẩm, Cồng chiêng",
     color: "#E4C1F9"
   },
   {
@@ -216,6 +238,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Ninh Thuận", "Bình Thuận", "Cần Thơ", "Hồ Chí Minh"],
     description: "Dân tộc Chăm là hậu duệ vương quốc Chăm Pa cổ, phân bố ở miền trung nam. Có nền văn hóa Hồi giáo với những tháp Chăm tuyệt đẹp.",
     language: "Tiếng Chăm",
+    clothing: "Áo dài Chăm, khăn đầu",
+    traditions: "Tháp Chăm, Lễ Hồi giáo",
     color: "#FFC6FF"
   },
   {
@@ -227,6 +251,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Sơn La", "Hòa Bình"],
     description: "Dân tộc Khơ Mú phân bố ở các vùng cao nguyên phía tây bắc. Sống trên núi cao trong các khu rừng nguyên sinh.",
     language: "Tiếng Khơ Mú",
+    clothing: "Áo bố, quần vải",
+    traditions: "Dệt vải, Lễ cấp sắc",
     color: "#DDA0DD"
   },
   {
@@ -238,6 +264,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc La Chí sống ở những khu vực cao đặc biệt gần biên giới phía bắc. Là dân tộc ít người với phong tục độc đáo.",
     language: "Tiếng La Chí",
     image: "/assets/LaChi.avif",
+    clothing: "Áo dài truyền thống, váy sọc",
+    traditions: "Tết cổ truyền, Dệt vải",
     color: "#F0E68C"
   },
   {
@@ -248,8 +276,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Sơn La", "Lai Châu"],
     description: "Dân tộc La Hủ là một nhóm dân tộc nhỏ ở vùng tây bắc. Sở hữu những đặc trưng văn hóa đặc biệt.",
     language: "Tiếng La Hủ",
-    image: "/assets/LaHa.avif",
-    color: "#98D8C8"
+    image: "/assets/LaHa.avif",    clothing: "Áo đen thêu, quần sọc",
+    traditions: "Múa truyền thống, Tết cổ",    color: "#98D8C8"
   },
   {
     id: "phu-la",
@@ -259,8 +287,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Sơn La", "Lai Châu"],
     description: "Dân tộc Phủ Lá là một nhóm dân tộc nhỏ phân bố ở tây bắc. Có nền văn hóa riêng biệt giữa các dân tộc miền núi.",
     image: "/assets/PhuLa.avif",
-    language: "Tiếng Phủ Lá",
-    color: "#B4E7FF"
+    language: "Tiếng Phủ Lá",    clothing: "Áo cắn, quần xanh",
+    traditions: "Dệt thổ cẩm, Tết cổ",    color: "#B4E7FF"
   },
   {
     id: "hung",
@@ -270,8 +298,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Yên Bái", "Sơn La"],
     description: "Dân tộc Hùng sống phân tán ở các vùng cao. Có nối tiếp truyền thống văn đoan của các dân tộc cao nguyên.",
     image: "/assets/HaNhi.avif",
-    language: "Tiếng Hùng",
-    color: "#FFA07A"
+    language: "Tiếng Hùng",    clothing: "Áo thêu truyền thống, váy dài",
+    traditions: "Múa trống đồng, Tết cổ",    color: "#FFA07A"
   },
   {
     id: "raglai",
@@ -282,8 +310,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     image: "/assets/RaGlai.avif",
     description: "Dân tộc Ra Glai sinh sống ở vùng miền trung nam Việt Nam. Có nền kinh tế chủ yếu dựa trên nông nghiệp.",
     language: "Tiếng Ra Glai",
-    hint: "Chủ nhân của những bộ đàn đá thiêng liêng sườn Đông Trường Sơn. Tỷ lệ suy dinh dưỡng trẻ em còn khá do phụ thuộc nương rẫy nứt nẻ mùa khô.",
-    color: "#F5DEB3"
+    hint: "Chủ nhân của những bộ đàn đá thiêng liêng sườn Đông Trường Sơn. Tỷ lệ suy dinh dưỡng trẻ em còn khá do phụ thuộc nương rẫy nứt nẻ mùa khô.",    clothing: "Áo thêu, váy rộng",
+    traditions: "Đàn đá, Lễ cầu mưa",    color: "#F5DEB3"
   },
   {
     id: "nung",
@@ -294,6 +322,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Nùng sinh sống ở các tỉnh phía đông bắc Việt Nam. Có nền văn hóa tương tự với dân tộc Tày.",
     language: "Tiếng Nùng",
     image: "/assets/Nung.avif",
+    clothing: "Váy dài, áo cánh",
+    traditions: "Tết cổ truyền, Hát Then",
     color: "#FFB347"
   },
   {
@@ -306,6 +336,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     hint: "Từ ngày sống trong hang đá nguyên thủy, nay mới ra định cư ở biên giới Quảng Bình. Gặp muôn vàn khó khăn về thiếu đất sản xuất, y tế và giáo dục yếu kém.",
     description: "Dân tộc Chứt sống ở vùng miền trung, là một trong những dân tộc ít người nhất.",
     language: "Tiếng Chứt",
+    clothing: "Áo thêu đơn giản, quần vải",
+    traditions: "Tết cổ truyền, Lễ hội",
     color: "#FFA500"
   },
   {
@@ -317,8 +349,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     image: "/assets/Tho.avif",
     hint: "Giao thoa mạnh mẽ với người Kinh ở Nghệ An, đời sống vật chất không ngưng cải thiện. Cái giá phải trả là ngôn ngữ và phong tục riêng gần như lụi tàn.",
     description: "Dân tộc Thổ sống ở vùng trung bộ Việt Nam, gần vùng cư trú của dân tộc Chứt.",
-    language: "Tiếng Thổ",
-    color: "#FFD700"
+    language: "Tiếng Thổ",    clothing: "Áo cánh, váy truyền thống",
+    traditions: "Tết cổ truyền, Lễ hội",    color: "#FFD700"
   },
   {
     id: "bru",
@@ -329,6 +361,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Quảng Trị", "Quảng Bình"],
     description: "Dân tộc Bru sống ở vùng miền trung, khu vực Tây Quảng Trị.",
     language: "Tiếng Bru",
+    clothing: "Áo thêu hoa, váy sọc xanh",
+    traditions: "Múa trống đồng, Lễ cầu mưa",
     hint: "Vượt qua bom đạn chiến tranh, họ sống kiên cường ở Tây Quảng Trị. Giao thông khó khăn, đói nghèo còn tiếp diễn, trường lớp đơn sơ là nỗi lo lớn nhất.",
     color: "#ADFF2F"
   },
@@ -342,6 +376,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Cơ Tu sống ở vùng Tây Quảng Nam, miền núi phía tây.",
     language: "Tiếng Cơ Tu",
     hint: "Nhà Gươl và điệu múa Tung tung da dá là báu vật sống. Tuy nhiên, đường vào bản hay sạt lở mùa mưa, thương lái không vào được khiến nông sản ứ đọng.",
+    clothing: "Áo thêu, váy sọc",
+    traditions: "Nhà Gươl, Múa Tung tung",
     color: "#00FF00"
   },
   {
@@ -354,6 +390,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Tà Ôi sống ở vùng miền trung, có ngôn ngữ độc đáo.",
     language: "Tiếng Tà Ôi",
     hint: "Nổi tiếng khắp vùng với nghệ thuật dệt Zèng tinh xảo. Địa hình Trường Sơn hiểm trở cản trở giao thương, đời sống cái mặc có đủ nhưng cái ăn vẫn vất vả.",
+    clothing: "Áo thêu, váy sợi bố dệt",
+    traditions: "Dệt Zèng, Lễ cúng cơm mới",
     color: "#00CED1"
   },
   {
@@ -366,6 +404,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Giẻ-Triêng sống ở vùng Tây Quảng Nam và Quảng Ngãi.",
     language: "Tiếng Giẻ-Triêng",
     hint: "Giữ được tục cõng củi cưới chồng rất độc đáo. Sống ở vùng cao biên giới giáp Nam Lào, việc tiếp cận y tế hiện đại và học chữ còn rất nhiều cản trở.",
+    clothing: "Áo cánh, váy rộng thêu",
+    traditions: "Múa Thẩm-Kông, Lễ hội cúng thần lúa",
     color: "#1E90FF"
   },
   {
@@ -378,6 +418,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Xơ Đăng sống ở vùng tây nguyên, gồm nhiều nhóm có ngôn ngữ khác nhau.",
     language: "Tiếng Xơ Đăng",
     hint: "Sinh sống quanh núi Ngọc Linh, văn hóa phong phú. Kinh tế phụ thuộc vào rẫy, cần hỗ trợ thêm về kỹ thuật nông nghiệp hiện đại và tủ thuốc y tế bản.",
+    clothing: "Áo vải đen, váy xòe sọc",
+    traditions: "Cồng chiêng, Lễ cúng thần rừng",
     color: "#4169E1"
   },
   {
@@ -389,8 +431,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Bahnar sống ở vùng tây nguyên, có nền văn hóa liên quan đến nông nghiệp.",
     language: "Tiếng Bahnar",
     image: "/assets/Brao.avif",
-    hint: "Tên gợi nhớ thời xa xưa khi còn sống tự do ở rừng Tây Nguyên. Dù vậy, rừng cạn kiệt khiến tục thứ túi bảo vệ tinh thần lành mạnh dần lụi tàn.",
-    color: "#9370DB"
+    hint: "Tên gợi nhớ thời xa xưa khi còn sống tự do ở rừng Tây Nguyên. Dù vậy, rừng cạn kiệt khiến tục thứ túi bảo vệ tinh thần lành mạnh dần lụi tàn.",    clothing: "Áo vải sẫm, váy thêu hoa cỏ",
+    traditions: "Múa Trống đồng, Lễ hội Báo Má",    color: "#9370DB"
   },
   {
     id: "co-ho",
@@ -401,8 +443,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Cơ Ho sống ở vùng tây nguyên, là dân tộc khá đông ở khu vực này.",
     language: "Tiếng Cơ Ho",
     image: "/assets/CoHo.avif",
-    hint: "Xưa nay đều là những bậc thầy trồng quế ở núi Trà Bồng. Đường núi dốc cheo leo khiến y tế dự phòng chưa được tiếp cận đầy đủ khi ốm đau.",
-    color: "#8B008B"
+    hint: "Xưa nay đều là những bậc thầy trồng quế ở núi Trà Bồng. Đường núi dốc cheo leo khiến y tế dự phòng chưa được tiếp cận đầy đủ khi ốm đau.",    clothing: "Áo cánh vải, váy sọc đỏ xanh",
+    traditions: "Múa Tung tung, Lễ cầu mưa",    color: "#8B008B"
   },
 {
     id: "co",
@@ -413,6 +455,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Co (còn gọi là Cor, Col, Cùa, Trầu) sinh sống chủ yếu ở vùng núi sườn đông Trường Sơn. Dân tộc này rất nổi tiếng với nghề trồng quế truyền thống (Quế Trà Bồng) và nghệ thuật múa đấu chiêng.",
     language: "Tiếng Co (thuộc nhóm ngôn ngữ Môn - Khmer)",
     image: "/assets/Co.avif",
+    clothing: "Áo thêu hoa, váy sợi bố",
+    traditions: "Múa đấu chiêng, Lễ cúng đất",
     hint: "Xưa nay đều là những bậc thầu trồng quế ở núi Trà Bồng. Đường núi dốc cheo leo khiến y tế dự phòng chưa được tiếp cận đầy đủ khi ốm đau.",
     color: "#6495ED"
   },
@@ -425,8 +469,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Mnông sống ở vùng tây nguyên, nổi tiếng với lễ hội Mộc Châu.",
     image: "/assets/Mnong.avif",
     language: "Tiếng Mnông",
-    hint: "Lưu giữ kho tàng sử thi Ot N'drong khổng lồ. Việc thuần dưỡng voi mang lại bản sắc lớn nhưng kinh tế hộ gia đình vẫn eo hẹp, cần nâng cấp trạm y tế.",
-    color: "#FF1493"
+    hint: "Lưu giữ kho tàng sử thi Ot N'drong khổng lồ. Việc thuần dưỡng voi mang lại bản sắc lớn nhưng kinh tế hộ gia đình vẫn eo hẹp, cần nâng cấp trạm y tế.",    clothing: "Áo vải thêu, váy rộng xòe",
+    traditions: "Múa Xòe, Lễ hội Thu Cỏm",    color: "#FF1493"
   },
   {
     id: "xtieng",
@@ -437,6 +481,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     image: "/assets/Xtieng.avif",
     description: "Dân tộc Xtiêng sống ở vùng đông nam bộ, số lượng dân số ít.",
     language: "Tiếng Xtiêng",
+    clothing: "Áo cánh, váy vải dệt",
+    traditions: "Cồng chiêng, Lễ đâm trâu",
     hint: "Sống quanh vùng Bình Phước, kinh tế mủ cao su giúp đời sống đi lên. Việc bảo tồn nghệ thuật cồng chiêng và lễ hội đâm trâu trong giới trẻ đang là thách thức.",
     color: "#FF4500"
   },
@@ -449,6 +495,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     image: "/assets/ChoRo.avif",
     description: "Dân tộc Chơ Ro sống ở vùng tây nguyên, có văn hóa liên quan nông nghiệp cồn cây.",
     language: "Tiếng Chơ Ro",
+    clothing: "Áo thêu, váy sọc",
+    traditions: "Múa Cồng chiêng, Lễ Yang Va",
     hint: "Kinh tế đã hội nhập khá tốt ở vùng đất đỏ Đồng Nai. Tuy nhiên, không gian rừng suy giảm khiến các nghi lễ cúng thần lúa (Yang Va) vắng bóng hoàn toàn.",
     color: "#FF6347"
   },
@@ -461,6 +509,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Kon Tum"],
     description: "Dân tộc Rơ Mam sống ở Kon Tum, là một trong những dân tộc ít người nhất.",
     language: "Tiếng Rơ Mam",
+    clothing: "Áo bố, váy sợi dệt",
+    traditions: "Múa truyền thống, Lễ cúng lúa",
     hint: "Chỉ còn một làng duy nhất ở biên giới Kon Tum. Nhờ nhà nước, điện đường đã có, kinh tế khá lên nhưng thanh niên không còn ai biết nghề truyền thống.",
     color: "#FFB6C1"
   },
@@ -473,6 +523,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Hà Giang", "Tuyên Quang"],
     description: "Dân tộc Cao Lan sống ở các tỉnh phía bắc, gần biên giới.",
     language: "Tiếng Cao Lan",
+    clothing: "Áo cánh, váy dài dệt",
+    traditions: "Múa Xòe, Tết cổ truyền",
     hint: "Góp phần đáng kể trong lịch sử chống thôn tính và chinh phục đất đai ở núi Tây Bắc. Hiện nay, giao thông vẫn hẹp, y tế cơ sở còn yếu, nước sạch khan hiếm từng bản làng.",
     color: "#FFA07A"
   },
@@ -485,6 +537,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Lào Cai", "Lai Châu"],
     description: "Dân tộc Giáy sống ở tây bắc Việt Nam, có nền văn hóa độc đáo.",
     language: "Tiếng Giáy",
+    clothing: "Áo cánh, váy sọc truyền thống",
+    traditions: "Lễ hội Roóng Poọc, Hát lại",
     hint: "Kinh tế thung lũng lúa nước khá ổn định, người dân giỏi làm lạp xưởng và bánh khảo. Lễ hội Roóng Poọc đang cần được rót vốn để duy trì tổ chức hàng năm.",
     color: "#20B2AA"
   },
@@ -497,6 +551,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Ngái sống ở phía bắc, số lượng nhân khẩu rất ít.",
     language: "Tiếng Ngái",
     image: "/assets/Ngai.avif",
+    clothing: "Áo áng, quần vải ngắn",
+    traditions: "Tết cổ truyền, Hát Then",
     hint: "Số lượng ít, sống đan xen ở đồng bằng và thạo nghề biển, buôn bán. Đời sống vật chất rất cao nhưng bản sắc văn hóa đã bị đồng hóa mạnh mẽ.",
     color: "#3CB371"
   },
@@ -509,6 +565,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Hre sống ở miền trung, vùng Tây Quảng Ngãi.",
     language: "Tiếng Hre",
     image: "/assets/Hre.avif",
+    clothing: "Áo thêu, váy bố dệt",
+    traditions: "Múa Tung tung, Lễ cáp sắc",
     hint: "Nổi tiếng với những bộ đàn đá thiêng liêng sườn Đông Trường Sơn. Tỷ lệ suy dinh dưỡng trẻ em còn khá do phụ thuộc nương rẫy nứt nẻ mùa khô.",
     color: "#40E0D0"
   },
@@ -521,6 +579,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Pau Thê sống ở vùng đông bắc phía nam, có nền văn hóa độc đáo.",
     image: "/assets/PaThen.avif",
     language: "Tiếng Pau Thê",
+    clothing: "Áo cánh thêu, váy xòe",
+    traditions: "Lễ Nhảy Lửa, Múa cồng chiêng",
     hint: "Bí ẩn với lễ hội Nhảy Lửa thiêng liêng khiến du khách ngỡ ngàng. Tuy nhiên kinh tế tự túc là chính, hệ thống y tế chăm sóc sức khỏe còn nhiều khoảng trống.",
     color: "#5F9EA0"
   },
@@ -533,6 +593,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Crú sống ở vùng tây nguyên, số lượng dân số nhỏ.",
     image: "/assets/ChuRu.avif",
     language: "Tiếng Crú",
+    clothing: "Áo thêu hoa, váy sọc",
+    traditions: "Làm gốm, Lễ cúng lúa",
     hint: "Tài hoa với nghề làm gốm không dùng bàn xoay và làm nhẫn bạc. Cần thêm nguồn lực thương mại để đưa sản phẩm đi xa, cải thiện đời sống.",
     color: "#DC143C"
   },
@@ -545,6 +607,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     image: "/assets/Ma.avif",
     description: "Dân tộc Mạ sống ở Đắk Lắk, là dân tộc ít người.",
     language: "Tiếng Mạ",
+    clothing: "Áo dài vải, váy xòe",
+    traditions: "Dệt thổ cẩm, Lễ hội mộc",
     hint: "Từng có truyền thống dệt thổ cẩm rực rỡ bên dòng Đạ Đờng. Đang rất cần được hỗ trợ để mở rộng quy mô kinh tế địa phương và trường học.",
     color: "#AFEEEE"
   },
@@ -557,6 +621,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     image: "/assets/ODu.avif",
     description: "Dân tộc Ơ Đu sống ở tây bắc Việt Nam, vùng Sơn La.",
     language: "Tiếng Ơ Đu",
+    clothing: "Áo thêu, váy sợi bố",
+    traditions: "Múa Xòe, Tết cổ",
     hint: "Dân tộc ít người nhất Việt Nam ở Nghệ An. Nhà cửa và y tế được bao cấp khá ổn định, nhưng số người biết nói tiếng Ơ Đu đếm chưa qua hết ngón tay.",
     color: "#B0E0E6"
   },
@@ -569,6 +635,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Hòa Bình", "Sơn La"],
     description: "Dân tộc Xinh Mun sống ở tây bắc, nằm gần khu vực Ơ Đu.",
     language: "Tiếng Xinh Mun",
+    clothing: "Áo cánh vải, váy sọc",
+    traditions: "Múa truyền thống, Hát Then",
     hint: "Quần cư ở dọc biên giới Việt - Lào. Trẻ em gặp vô vàn khó khăn khi qua suối đến lớp, kinh tế chủ yếu tự cung tự cấp dựa vào hái lượm.",
     color: "#E0FFFF"
   },
@@ -581,6 +649,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Sơn La", "Lai Châu"],
     description: "Dân tộc Bố Y sống ở tây bắc, là dân tộc ít người.",
     language: "Tiếng Bố Y",
+    clothing: "Áo vải sẫm, quần xanh",
+    traditions: "Thợ mộc, Lễ tết cổ",
     hint: "Có nghề làm thợ mộc và rèn đúc rất khéo léo. Nhìn chung vẫn chật vật về kinh tế do đường sá vận chuyển hàng hóa bị chia cắt bởi đồi núi.",
     color: "#ADD8E6"
   },
@@ -593,6 +663,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     regions: ["Sơn La", "Lai Châu"],
     description: "Dân tộc Kháng sống ở tây bắc, gần khu vực Bố Y.",
     language: "Tiếng Kháng",
+    clothing: "Áo thêu, quần vải dệt",
+    traditions: "Múa cồng chiêng, Lễ cúng sông",
     hint: "Được mệnh danh là những chủ rái cá giỏi làm thuyền độc mộc Tây Bắc. Sinh kế sông nước bấp bênh, bản làng thiếu trạm y tế chuẩn phòng khi mưa lũ.",
     color: "#87CEEB"
   },
@@ -605,6 +677,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Mảng sống ở tây bắc, vùng rừng sâu.",
     language: "Tiếng Mảng",
     image: "/assets/Mang.avif",
+    clothing: "Áo cánh vải, váy sợi bố",
+    traditions: "Múa truyền thống, Tết cổ",
     hint: "Cư trú ven những con sông nậm Tây Bắc. Rất khó khăn, tỷ lệ đói nghèo còn cao, tiếng nói và văn hóa cổ bị lai tạp mạnh do nghèo đói chi phối.",
     color: "#00BFFF"
   },
@@ -617,6 +691,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Rục sống ở miền trung, vùng biên giới Việt-Lào.",
     language: "Tiếng Rục",
     image: "/assets/Lu.avif",
+    clothing: "Áo vải thêu, váy sọc",
+    traditions: "Nhuộm răng đen, Dệt vải",
     hint: "Người phụ nữ Lự nhuộm răng đen và dệt vải cực đỉnh. Mức sống trung bình thấp do xa trung tâm, cần hỗ trợ thêm thuốc men phòng dịch bệnh.",
     color: "#1E90FF"
   },
@@ -629,6 +705,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Pu Péo sống ở phía bắc, là nhóm dân tộc thiểu số.",
     image: "/assets/PuPeo.avif",
     language: "Tiếng Pu Péo",
+    clothing: "Áo cánh thêu, váy sọc truyền thống",
+    traditions: "Múa Xòe, Tết cổ truyền",
     hint: "Một trong những dân tộc ít người nhất Hà Giang. Đất đai khô cằn, kinh tế tụt hậu, việc giữ gìn tiếng nói riêng đang là cuộc chiến vô cùng gian nan.",
     color: "#00FA9A"
   },
@@ -641,6 +719,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     description: "Dân tộc Sán Dìu sống ở phía bắc, gần biên giới Trung Quốc.",
     image: "/assets/SanDiu.avif",
     language: "Tiếng Sán Dìu",
+    clothing: "Áo cánh, váy sọc dài",
+    traditions: "Hát Soọng Cô, Múa lân",
     hint: "Rất thạo làm ruộng nước và chăn nuôi, đời sống khá giả. Nhưng điệu hát Soọng Cô tuyệt hay nay chỉ còn những bậc cao niên thỉnh thoảng nhớ lại.",
     color: "#3CB371"
   },
@@ -653,6 +733,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     image: "/assets/BruVanKieu.avif",
     description: "Dân tộc Vân Kiều sống ở vùng Quảng Trị, gần khu vực của dân tộc Bru.",
     language: "Tiếng Vân Kiều",
+    clothing: "Áo thêu, váy dài dệt",
+    traditions: "Dệt vải, Làm gốm",
     hint: "Di sản tháp gạch và chữ viết đồ sộ. Trường học xây kiên cố nhưng các làng nghề dệt, gốm đang điêu đứng vì ế ẩm, lớp trẻ không mặn mà nối nghiệp.",
     color: "#FF69B4"
   },
@@ -665,6 +747,8 @@ export const ethnicGroupsData: EthnicGroup[] = [
     image: "/assets/TaMun.avif",
     description: "Dân tộc Tà Mun sống ở vùng phía nam, đông bắc Tây Ninh. Là dân tộc ít người với bản sắc văn hóa riêng.",
     language: "Tiếng Tà Mun",
+    clothing: "Áo cánh vải, váy sợi bố",
+    traditions: "Múa truyền thống, Lễ cấp sắc",
     hint: "Bám rễ trên cao nguyên đá Hoàng Su Phì. Thiếu nước trầm trọng vào mùa khô ảnh hưởng cả kinh tế nương rẫy lẫn vệ sinh sức khỏe cộng đồng.",
     color: "#BA55D3"
   },

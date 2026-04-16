@@ -36,7 +36,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-sm sm:text-base font-semibold tracking-[0.3em] uppercase text-white mb-6"
           >
-            Kinh tế Chính trị Mác — Lênin
+          Mác — Lênin
           </motion.p>
 
           {/* Main title */}
