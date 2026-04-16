@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
-import { Search, Check, Info, MapPin, Users, Languages, Shirt, Sparkles } from "lucide-react";
+import { Search, Check, Info, MapPin, Users, Languages, Shirt, Sparkles, BarChart3 } from "lucide-react";
 import "./EthnicDistributionMap.css";
 
 interface SelectedEthnic {
@@ -33,6 +33,11 @@ const EthnicDistributionMap: React.FC = () => {
   const [showElevationLegend, setShowElevationLegend] = useState(true);
   const [showSidebar, setShowSidebar] = useState(true);
   const [showEmptyMessage, setShowEmptyMessage] = useState(true);
+  const [showRealMap, setShowRealMap] = useState(true);
+  const [showRealMapModal, setShowRealMapModal] = useState(false);
+  const [hoverSidebar, setHoverSidebar] = useState(false);
+  const [hoverRealMap, setHoverRealMap] = useState(false);
+  const [hoverLegend, setHoverLegend] = useState(false);
   const [tooltip, setTooltip] = useState<TooltipData>({
     x: 0,
     y: 0,
@@ -255,10 +260,35 @@ const getElevationColor = (provinceName: string) => {
           initial={{ x: -400, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           onClick={() => setShowSidebar(true)}
+          onMouseEnter={() => setHoverSidebar(true)}
+          onMouseLeave={() => setHoverSidebar(false)}
           className="fixed left-6 top-20 z-30 w-12 h-12 rounded-full bg-white/40 backdrop-blur-xl border border-white/50 shadow-lg hover:bg-white/60 flex items-center justify-center transition-all"
           title="Hiển thị sidebar"
         >
-          <span className="text-xl">→</span>
+          <AnimatePresence mode="wait">
+            {hoverSidebar ? (
+              <motion.div
+                key="chart"
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                exit={{ scale: 0, rotate: 180 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Users className="w-6 h-6 text-slate-700" />
+              </motion.div>
+            ) : (
+              <motion.span
+                key="arrow"
+                initial={{ scale: 0, rotate: 180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                exit={{ scale: 0, rotate: -180 }}
+                transition={{ duration: 0.3 }}
+                className="text-xl"
+              >
+                →
+              </motion.span>
+            )}
+          </AnimatePresence>
         </motion.button>
       )}
 
@@ -431,6 +461,84 @@ const getElevationColor = (provinceName: string) => {
         })()}
       </AnimatePresence>
 
+      {/* --- REAL MAP CARD --- */}
+      <AnimatePresence>
+        {showRealMap && (
+          <motion.div
+            initial={{ x: 400, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: 400, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed right-6  top-20 z-30 w-72 h-96 rounded-2xl border border-white/50 shadow-2xl overflow-hidden group"
+            style={{
+              backgroundImage: 'url(/assets/bando.avif)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
+          >
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors" />
+            
+            <div className="relative h-full flex flex-col justify-between p-6">
+              <div
+                onClick={() => setShowRealMapModal(true)}
+                className="flex-1 cursor-pointer hover:opacity-80 transition-opacity flex items-center justify-center"
+              >
+                <h3 className="text-xl font-black text-white drop-shadow-lg">
+                  🗺️ Bản đồ thực tế
+                </h3>
+              </div>
+              
+              <button
+                onClick={() => setShowRealMap(false)}
+                className="w-8 h-8 rounded-lg  hover:bg-white/10 flex items-center justify-center transition-all self-end"
+                title="Ẩn bản đồ"
+              >
+                <span className="text-lg">→</span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* --- NÚT TOGGLE REAL MAP (Khi card bị ẩn) --- */}
+      {!showRealMap && (
+        <motion.button
+          initial={{ x: 400, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          onClick={() => setShowRealMap(true)}
+          onMouseEnter={() => setHoverRealMap(true)}
+          onMouseLeave={() => setHoverRealMap(false)}
+          className="fixed right-6 top-20 z-30 w-12 h-12 rounded-full bg-white/40 backdrop-blur-xl border border-white/50 shadow-lg hover:bg-white/60 flex items-center justify-center transition-all"
+          title="Hiển thị bản đồ"
+        >
+          <AnimatePresence mode="wait">
+            {hoverRealMap ? (
+              <motion.div
+                key="chart"
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                exit={{ scale: 0, rotate: 180 }}
+                transition={{ duration: 0.3 }}
+              >
+                <MapPin className="w-6 h-6 text-slate-700" />
+              </motion.div>
+            ) : (
+              <motion.span
+                key="arrow"
+                initial={{ scale: 0, rotate: 180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                exit={{ scale: 0, rotate: -180 }}
+                transition={{ duration: 0.3 }}
+                className="text-xl"
+              >
+                ←
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.button>
+      )}
+
       {/* --- ELEVATION LEGEND CARD --- */}
       <AnimatePresence>
         {showElevationLegend && (
@@ -439,7 +547,7 @@ const getElevationColor = (provinceName: string) => {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 400, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed right-6 bottom-32 z-30 w-72 bg-white/30 backdrop-blur-2xl rounded-2xl border border-white/50 shadow-2xl overflow-hidden"
+            className="fixed right-6 bottom-20 z-30 w-72 bg-white/30 backdrop-blur-2xl rounded-2xl border border-white/50 shadow-2xl overflow-hidden"
           >
             <div className="p-6">
               <div className="flex items-center justify-between mb-5">
@@ -458,7 +566,7 @@ const getElevationColor = (provinceName: string) => {
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg shadow-md" style={{ backgroundColor: "#b91c1c" }} />
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-slate-800">Rất cao</p>
+                    <p className="text-sm font-bold text-slate-800">Núi cao</p>
                     <p className="text-xs text-slate-600">≥ 800m</p>
                   </div>
                 </div>
@@ -467,7 +575,7 @@ const getElevationColor = (provinceName: string) => {
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg shadow-md" style={{ backgroundColor: "#f87171" }} />
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-slate-800">Cao</p>
+                    <p className="text-sm font-bold text-slate-800">Núi thấp & Cao nguyên</p>
                     <p className="text-xs text-slate-600">400m - 799m</p>
                   </div>
                 </div>
@@ -476,7 +584,7 @@ const getElevationColor = (provinceName: string) => {
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg shadow-md" style={{ backgroundColor: "#fde047" }} />
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-slate-800">Trung du</p>
+                    <p className="text-sm font-bold text-slate-800">Trung du & Đồi lượn sóng</p>
                     <p className="text-xs text-slate-600">100m - 399m</p>
                   </div>
                 </div>
@@ -485,7 +593,7 @@ const getElevationColor = (provinceName: string) => {
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg shadow-md" style={{ backgroundColor: "#93c5fd" }} />
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-slate-800">Ven biển</p>
+                    <p className="text-sm font-bold text-slate-800">Bán sơn địa & Thềm phù sa cổ</p>
                     <p className="text-xs text-slate-600">50m - 99m</p>
                   </div>
                 </div>
@@ -494,7 +602,7 @@ const getElevationColor = (provinceName: string) => {
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg shadow-md" style={{ backgroundColor: "#3b82f6" }} />
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-slate-800">Đồng bằng</p>
+                    <p className="text-sm font-bold text-slate-800">Đồng bằng & Hạ lưu sông</p>
                     <p className="text-xs text-slate-600">&lt; 50m</p>
                   </div>
                 </div>
@@ -510,12 +618,86 @@ const getElevationColor = (provinceName: string) => {
           initial={{ x: 400, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           onClick={() => setShowElevationLegend(true)}
+          onMouseEnter={() => setHoverLegend(true)}
+          onMouseLeave={() => setHoverLegend(false)}
           className="fixed right-6 bottom-32 z-30 w-12 h-12 rounded-full bg-white/40 backdrop-blur-xl border border-white/50 shadow-lg hover:bg-white/60 flex items-center justify-center transition-all"
           title="Hiển thị chú thích độ cao"
         >
-          <span className="text-xl">←</span>
+          <AnimatePresence mode="wait">
+            {hoverLegend ? (
+              <motion.div
+                key="chart"
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                exit={{ scale: 0, rotate: 180 }}
+                transition={{ duration: 0.3 }}
+              >
+                <BarChart3 className="w-6 h-6 text-slate-700" />
+              </motion.div>
+            ) : (
+              <motion.span
+                key="arrow"
+                initial={{ scale: 0, rotate: 180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                exit={{ scale: 0, rotate: -180 }}
+                transition={{ duration: 0.3 }}
+                className="text-xl"
+              >
+                ←
+              </motion.span>
+            )}
+          </AnimatePresence>
         </motion.button>
       )}
+
+      {/* --- REAL MAP MODAL --- */}
+<AnimatePresence>
+  {showRealMapModal && (
+    <>
+      {/* Overlay: Làm tối nền hoàn toàn để nổi bật ảnh */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={() => setShowRealMapModal(false)}
+        className="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] cursor-zoom-out"
+      />
+      
+      {/* Container chứa ảnh: Chiếm trọn màn hình */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        className="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none"
+      >
+        <div className="relative w-full h-full flex items-center justify-center pointer-events-auto">
+          {/* Nút X nằm tách biệt ở góc trên bên phải */}
+          <button
+            onClick={() => setShowRealMapModal(false)}
+            className="absolute top-10 right-10 w-14 h-14 rounded-full bg-white/10 hover:bg-red-500 hover:text-white flex items-center justify-center transition-all backdrop-blur-md border border-white/20 z-20 group"
+          >
+            <span className="text-2xl transition-transform group-hover:rotate-90">✕</span>
+          </button>
+
+          {/* ẢNH CHÍNH: Dùng thẻ img để tận dụng object-contain (Full màn hình mà không mất tỷ lệ) */}
+          <img 
+            src="/assets/bando.avif" 
+            alt="Bản đồ thực tế"
+            className="max-w-full max-h-full object-contain rounded-lg shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+            onClick={(e) => e.stopPropagation()} 
+          />
+
+          {/* Hint ở dưới cùng */}
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-50">
+            <p className="text-white text-xs font-bold uppercase tracking-widest">
+              Bấm vào vùng đen để đóng
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </>
+  )}
+</AnimatePresence>
 
       {/* --- GIỮ NGUYÊN PHẦN NGUỒN --- */}
       <div className="sources-footer fixed bottom-0 left-0 right-0 z-40 bg-white/60 backdrop-blur-md border-t border-white/20 py-4">

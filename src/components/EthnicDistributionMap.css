@@ -1,81 +1,449 @@
-/* --- CONTAINER TỔNG --- */
+/* Main container */
 .ethnic-distribution-container {
-  position: relative;
+  display: flex;
   width: 100%;
+  height: 100vh;
   overflow: hidden;
-  background-color: #f8fafc; /* Nền sáng sạch sẽ */
+  background-color: #f8fafc;
 }
 
-/* --- SIDEBAR GLASSMORPHISM --- */
+/* SIDEBAR STYLES */
 .ethnic-sidebar {
-  /* Các thuộc tính quan trọng để tạo hiệu ứng kính mờ */
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  width: 350px;
+  min-width: 350px;
+  border-right: 1px solid #e2e8f0;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  z-index: 10;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
-/* Tùy chỉnh thanh cuộn của ScrollArea (Dành cho Chrome/Safari) */
-.ethnic-list [data-radix-scroll-area-viewport]::-webkit-scrollbar {
-  width: 4px;
+.sidebar-header {
+  margin-bottom: 1rem;
 }
 
-.ethnic-list [data-radix-scroll-area-viewport]::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+.sidebar-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+  color: #0f172a;
 }
 
-/* --- MAP AREA --- */
+.subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.search-section {
+  margin-bottom: 1rem;
+}
+
+.search-input {
+  width: 100%;
+}
+
+/* Selected badges section */
+.selected-section {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.selected-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.selected-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.clear-button {
+  height: 24px;
+  font-size: 0.75rem;
+}
+
+.selected-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.selected-badge {
+  cursor: pointer;
+  transition: opacity 0.2s;
+  color: white;
+}
+
+.selected-badge:hover {
+  opacity: 0.9;
+}
+
+/* Ethnic list */
+.ethnic-list {
+  flex: 1;
+  overflow: auto;
+}
+
+.ethnic-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 8px;
+}
+
+.ethnic-item {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease-in-out;
+}
+
+.ethnic-item:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.ethnic-item.selected {
+  border: 2px solid #94a3b8;
+  background-color: #f1f5f9;
+}
+
+.ethnic-color-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ethnic-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ethnic-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1e293b;
+  margin: 0;
+}
+
+.ethnic-pop {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.checkmark {
+  color: #2563eb;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.no-results {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+/* MAP AREA */
 .map-container {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(135deg, #006db8 0%, #0091d4 50%, #00a8e8 100%);
+}
+
+.map-container svg {
   width: 100%;
   height: 100%;
-  cursor: grab;
 }
 
-.map-container:active {
-  cursor: grabbing;
-}
-
-/* Hiệu ứng cho các vòng tròn dân tộc */
+/* Ethnic circles on map */
 .ethnic-circle {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: fill-opacity 0.3s ease, stroke-width 0.3s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
 }
 
 .ethnic-circle:hover {
-  filter: brightness(1.2) drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
-  stroke-width: 2px;
+  fill-opacity: 0.95 !important;
+  stroke-width: 1.5 !important;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
 }
 
-/* --- TOOLTIP TÙY CHỈNH --- */
+.ethnic-circle:active {
+  fill-opacity: 0.85 !important;
+}
+
+/* Tooltip */
 .ethnic-tooltip {
+  background-color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 4px solid #3b82f6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-size: 12px;
   pointer-events: none;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-width: 200px;
 }
 
-/* --- PHẦN NGUỒN (FOOTER) --- */
+/* Overlay message when no selection */
+.map-overlay-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(248, 250, 252, 0.9);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.message-content {
+  background-color: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  pointer-events: auto;
+}
+
+.message-content h3 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+.message-content p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+/* Sources footer */
 .sources-footer {
-  /* Đảm bảo phần nguồn luôn nằm dưới cùng và mờ ảo */
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0));
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-  .ethnic-sidebar {
-    width: 90%;
-    left: 5%;
-    right: 5%;
-    height: 40vh;
-    top: auto;
-    bottom: 80px;
+.sources-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.sources-label {
+  font-weight: 600;
+  color: #475569;
+}
+
+.sources-link {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.sources-link:hover {
+  color: #1d4ed8;
+  border-bottom-color: #3b82f6;
+}
+
+.sources-separator {
+  color: #cbd5e1;
+}
+
+/* Detail Panel */
+.ethnic-detail-panel {
+  position: fixed;
+  right: 0;
+  top: 44px;
+  bottom: 50px;
+  width: 420px;
+  background-color: #ffffff;
+  border-left: 1px solid #e2e8f0;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  overflow-y: auto;
+  animation: slideInRight 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
   }
-  
-  .ethnic-detail-panel {
-    width: 100% !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    top: 0 !important;
-    border-radius: 0 !important;
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
+}
+
+.detail-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.detail-close-btn:hover {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+.detail-image {
+  width: 100%;
+  height: 300px;
+  background-color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-content {
+  flex: 1;
+  padding: 24px;
+  padding-bottom: 32px;
+  overflow-y: auto;
+  background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
+}
+
+.detail-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+  word-break: break-word;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.detail-en-name {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0 0 20px 0;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.detail-section {
+  margin-bottom: 16px;
+  padding: 14px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.detail-section:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.detail-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #64748b;
+  margin: 0 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detail-label::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  background-color: #3b82f6;
+  border-radius: 50%;
+}
+
+.detail-value {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #334155;
+  margin: 0;
+  font-weight: 500;
+}
+
+.detail-regions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.detail-region-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  border: 1px solid #bfdbfe;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #1e40af;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.detail-region-badge:hover {
+  background: linear-gradient(135deg, #bfdbfe 0%, #c7d2fe 100%);
+  border-color: #93c5fd;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.15);
 }
